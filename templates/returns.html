@@ -1,0 +1,126 @@
+{% extends "base.html" %} {% block title %}Returns Policy - Pure Water{%
+endblock %} {% block content %}
+<div class="container py-5">
+  <div class="row">
+    <div class="col-lg-8 mx-auto">
+      <h1 class="mb-4">Returns Policy</h1>
+
+      <div class="card shadow-sm mb-4">
+        <div class="card-body">
+          <h2 class="h4 mb-3">Our Commitment to Quality</h2>
+          <p>
+            At Pure Water, we stand behind the quality of our products. If
+            you're not completely satisfied with your purchase, we're here to
+            help.
+          </p>
+        </div>
+      </div>
+
+      <div class="card shadow-sm mb-4">
+        <div class="card-body">
+          <h2 class="h4 mb-3">Return Policy for Bottled Water Products</h2>
+          <p>
+            Due to the nature of our products and for health and safety reasons,
+            we generally do not accept returns on opened water products.
+            However, we offer the following options:
+          </p>
+
+          <h3 class="h5 mt-4">Damaged or Defective Products</h3>
+          <p>If you receive a damaged or defective product:</p>
+          <ul>
+            <li>
+              Contact our customer service team within 48 hours of delivery
+            </li>
+            <li>Provide your order number and a description of the issue</li>
+            <li>We may request photos of the damaged products</li>
+            <li>We'll arrange for a replacement or refund</li>
+          </ul>
+
+          <h3 class="h5 mt-4">Unopened Products</h3>
+          <p>For unopened products in their original packaging:</p>
+          <ul>
+            <li>Returns must be initiated within 14 days of delivery</li>
+            <li>Products must be in their original, sealed condition</li>
+            <li>
+              Return shipping costs are the responsibility of the customer
+              unless the return is due to our error
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="card shadow-sm mb-4">
+        <div class="card-body">
+          <h2 class="h4 mb-3">Return Policy for Equipment and Accessories</h2>
+          <p>For water dispensers, coolers, and other equipment:</p>
+          <ul>
+            <li>30-day return period from the date of delivery</li>
+            <li>Items must be in original packaging with all accessories</li>
+            <li>A 15% restocking fee may apply</li>
+            <li>Customer is responsible for return shipping costs</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="card shadow-sm mb-4">
+        <div class="card-body">
+          <h2 class="h4 mb-3">Subscription Cancellations</h2>
+          <p>For subscription services:</p>
+          <ul>
+            <li>
+              You may cancel your subscription at any time through your account
+              dashboard
+            </li>
+            <li>
+              Cancellations must be made at least 3 business days before your
+              next scheduled delivery
+            </li>
+            <li>No refunds are provided for partial subscription periods</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="card shadow-sm mb-4">
+        <div class="card-body">
+          <h2 class="h4 mb-3">How to Initiate a Return</h2>
+          <p>To initiate a return or report a problem with your order:</p>
+          <ol>
+            <li>
+              Contact our customer service team at
+              <a href="mailto:support@purewater.com">support@purewater.com</a>
+              or call (800) 123-4567
+            </li>
+            <li>
+              Provide your order number and details about your return request
+            </li>
+            <li>Our team will guide you through the next steps</li>
+          </ol>
+        </div>
+      </div>
+
+      <div class="card shadow-sm">
+        <div class="card-body">
+          <h2 class="h4 mb-3">Refund Processing</h2>
+          <p>
+            Once we receive and inspect your return, we will process your
+            refund:
+          </p>
+          <ul>
+            <li>Refunds are typically processed within 5-7 business days</li>
+            <li>Credit will be applied to your original payment method</li>
+            <li>
+              You will receive an email notification when your refund is
+              processed
+            </li>
+          </ul>
+
+          <p class="mt-4">
+            If you have any questions about our return policy, please
+            <a href="{{ url_for('main.contact') }}">contact us</a>.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

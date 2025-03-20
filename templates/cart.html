@@ -1,0 +1,274 @@
+<!-- templates/cart.html -->
+{% extends "layout.html" %}
+
+{% block title %}Shopping Cart - PureFlow{% endblock %}
+
+{% block content %}
+<section class="hero-small" data-aos="fade-in">
+  <div class="hero-content">
+    <h1 class="hero-title">Your Cart</h1>
+    <p class="hero-subtitle">Review your items before checkout</p>
+  </div>
+</section>
+
+<section class="py-5">
+  <div class="container">
+    <div class="row" id="cart-container">
+      <!-- Cart content will be loaded dynamically with JavaScript -->
+    </div>
+  </div>
+</section>
+
+<!-- Empty Cart Template -->
+<template id="empty-cart-template">
+  <div class="col-12 text-center py-5">
+    <img src="{{ url_for('static', filename='images/empty-cart.svg') }}" alt="Empty Cart" class="img-fluid mb-4" style="max-width: 200px;">
+    <h3>Your cart is empty</h3>
+    <p class="text-muted mb-4">Looks like you haven't added any products to your cart yet.</p>
+    <a href="{{ url_for('main.products') }}" class="btn btn-custom">Browse Products</a>
+  </div>
+</template>
+
+<!-- Cart Items Template -->
+<template id="cart-items-template">
+  <div class="col-lg-8">
+    <div class="card border-0 shadow-sm mb-4">
+      <div class="card-header bg-white py-3 d-flex justify-content-between align-items-center">
+        <h4 class="mb-0">Shopping Cart (<span id="cart-count">0</span> items)</h4>
+        <button class="btn btn-sm btn-outline-danger" id="clear-cart">Clear Cart</button>
+      </div>
+      <div class="card-body p-0">
+        <div class="table-responsive">
+          <table class="table table-hover mb-0">
+            <thead class="table-light">
+              <tr>
+                <th>Product</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Total</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody id="cart-items">
+              <!-- Cart items will be inserted here -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-4">
+    <div class="card border-0 shadow-sm mb-4">
+      <div class="card-header bg-white py-3">
+        <h4 class="mb-0">Order Summary</h4>
+      </div>
+      <div class="card-body">
+        <div class="d-flex justify-content-between mb-2">
+          <span>Subtotal</span>
+          <span id="subtotal">$0.00</span>
+        </div>
+        <div class="d-flex justify-content-between mb-2">
+          <span>Shipping</span>
+          <span id="shipping">$0.00</span>
+        </div>
+        <div class="d-flex justify-content-between mb-2">
+          <span>Tax</span>
+          <span id="tax">$0.00</span>
+        </div>
+        <hr>
+        <div class="d-flex justify-content-between mb-4">
+          <strong>Total</strong>
+          <strong id="total">$0.00</strong>
+        </div>
+        <button class="btn btn-custom w-100 mb-3" id="checkout-btn">Proceed to Checkout</button>
+        <a href="{{ url_for('main.products') }}" class="btn btn-outline-secondary w-100">Continue Shopping</a>
+      </div>
+    </div>
+  </div>
+</template>
+
+<!-- Cart Item Template -->
+<template id="cart-item-template">
+  <tr class="cart-item">
+    <td>
+      <div class="d-flex align-items-center">
+        <img src="" alt="Product" class="cart-item-image me-3" style="width: 60px; height: 60px; object-fit: cover;">
+        <div>
+          <h6 class="cart-item-name mb-1"></h6>
+          <div class="text-muted small">
+            <span class="cart-item-category"></span> | 
+            <span class="cart-item-size"></span>
+          </div>
+        </div>
+      </div>
+    </td>
+    <td class="cart-item-price"></td>
+    <td>
+      <div class="quantity-selector d-flex align-items-center">
+        <button class="btn btn-sm btn-outline-secondary quantity-decrease">
+          <i class="fas fa-minus"></i>
+        </button>
+        <input type="number" class="form-control form-control-sm text-center mx-2 cart-item-quantity" value="1" min="1" max="99" style="width: 60px;">
+        <button class="btn btn-sm btn-outline-secondary quantity-increase">
+          <i class="fas fa-plus"></i>
+        </button>
+      </div>
+    </td>
+    <td class="cart-item-total"></td>
+    <td>
+      <button class="btn btn-sm btn-outline-danger remove-item">
+        <i class="fas fa-trash"></i>
+      </button>
+    </td>
+  </tr>
+</template>
+{% endblock %}
+
+{% block scripts %}
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Check if Cart object exists
+    if (typeof Cart === 'undefined') {
+      console.error('Cart object is not defined. Make sure cart.js is loaded correctly.');
+      document.getElementById('cart-container').innerHTML = '<div class="col-12 text-center py-5"><p class="text-danger">Error loading cart functionality. Please try refreshing the page.</p></div>';
+      return;
+    }
+    
+    // Render cart
+    renderCart();
+    
+    // Function to render the cart
+    function renderCart() {
+      console.log('Rendering cart...');
+      const cart = Cart.getCart();
+      console.log('Cart contents:', cart);
+      
+      const cartContainer = document.getElementById('cart-container');
+      
+      // Clear the container
+      cartContainer.innerHTML = '';
+      
+      if (!cart || cart.length === 0) {
+        console.log('Cart is empty, showing empty template');
+        // Show empty cart message
+        const emptyTemplate = document.getElementById('empty-cart-template');
+        cartContainer.appendChild(document.importNode(emptyTemplate.content, true));
+      } else {
+        console.log('Cart has items, showing items template');
+        // Show cart items
+        const itemsTemplate = document.getElementById('cart-items-template');
+        cartContainer.appendChild(document.importNode(itemsTemplate.content, true));
+        
+        // Update cart count
+        document.getElementById('cart-count').textContent = cart.length;
+        
+        // Render each cart item
+        const cartItemsContainer = document.getElementById('cart-items');
+        const itemTemplate = document.getElementById('cart-item-template');
+        
+        let subtotal = 0;
+        
+        cart.forEach((item, index) => {
+          console.log('Rendering item:', item);
+          const itemNode = document.importNode(itemTemplate.content, true);
+          const itemRow = itemNode.querySelector('.cart-item');
+          
+          // Set item data
+          const itemImage = itemRow.querySelector('.cart-item-image');
+          itemImage.src = item.imageUrl || '{{ url_for("static", filename="images/product-placeholder.jpg") }}';
+          itemImage.alt = item.name;
+          
+          itemRow.querySelector('.cart-item-name').textContent = item.name;
+          itemRow.querySelector('.cart-item-category').textContent = item.category || 'Product';
+          itemRow.querySelector('.cart-item-size').textContent = item.size || 'Standard';
+          itemRow.querySelector('.cart-item-price').textContent = `$${(item.price || 0).toFixed(2)}`;
+          
+          const quantityInput = itemRow.querySelector('.cart-item-quantity');
+          quantityInput.value = item.quantity || 1;
+          quantityInput.dataset.index = index;
+          
+          const itemTotal = (item.price || 0) * (item.quantity || 1);
+          itemRow.querySelector('.cart-item-total').textContent = `$${itemTotal.toFixed(2)}`;
+          
+          // Add event listeners
+          const decreaseBtn = itemRow.querySelector('.quantity-decrease');
+          decreaseBtn.addEventListener('click', function() {
+            updateQuantity(index, Math.max(1, (item.quantity || 1) - 1));
+          });
+          
+          const increaseBtn = itemRow.querySelector('.quantity-increase');
+          increaseBtn.addEventListener('click', function() {
+            updateQuantity(index, (item.quantity || 1) + 1);
+          });
+          
+          quantityInput.addEventListener('change', function() {
+            const newQuantity = parseInt(this.value) || 1;
+            updateQuantity(index, Math.max(1, newQuantity));
+          });
+          
+          const removeBtn = itemRow.querySelector('.remove-item');
+          removeBtn.addEventListener('click', function() {
+            Cart.removeItem(index);
+            renderCart();
+          });
+          
+          cartItemsContainer.appendChild(itemRow);
+          
+          // Add to subtotal
+          subtotal += itemTotal;
+        });
+        
+        // Calculate order summary
+        const shipping = subtotal >= 50 ? 0 : 5.99;
+        const tax = subtotal * 0.08; // 8% tax rate
+        const total = subtotal + shipping + tax;
+        
+        // Update order summary
+        document.getElementById('subtotal').textContent = `$${subtotal.toFixed(2)}`;
+        document.getElementById('shipping').textContent = shipping === 0 ? 'FREE' : `$${shipping.toFixed(2)}`;
+        document.getElementById('tax').textContent = `$${tax.toFixed(2)}`;
+        document.getElementById('total').textContent = `$${total.toFixed(2)}`;
+        
+        // Add event listeners for summary actions
+        document.getElementById('clear-cart').addEventListener('click', function() {
+          if (confirm('Are you sure you want to clear your cart?')) {
+            Cart.clearCart();
+            renderCart();
+          }
+        });
+        
+        document.getElementById('checkout-btn').addEventListener('click', function() {
+          window.location.href = "{{ url_for('main.checkout') }}";
+        });
+      }
+    }
+    
+    // Function to update item quantity
+    function updateQuantity(index, quantity) {
+      Cart.updateQuantity(index, quantity);
+      renderCart();
+    }
+  });
+</script>
+{% endblock %}
+
+{% block styles %}
+<style>
+  .cart-item-image {
+    border-radius: 5px;
+  }
+  
+  .quantity-selector .form-control {
+    width: 50px;
+  }
+  
+  .remove-item {
+    width: 36px;
+    height: 36px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+</style>
+{% endblock %}

@@ -1,0 +1,23 @@
+<!-- templates/500.html -->
+{% extends "layout.html" %}
+
+{% block extra_css %}
+<style>
+    .hero-small {
+        margin-top: 80px;
+        padding: 60px 0;
+    }
+    
+    .animated-bg {
+        margin-top: 80px;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1>Internal Server Error</h1>
+    <p>Something went wrong. Please try again later.</p>
+    <a href="{{ url_for('main.index') }}" class="btn btn-primary">Return to Home</a>
+</div>
+{% endblock %}

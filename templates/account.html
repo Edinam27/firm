@@ -1,0 +1,42 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+Account Information
+Email: {{ current_user.email }}
+{% if current_user.individual_profile %} Name: {{ current_user.individual_profile.first_name }} {{ current_user.individual_profile.last_name }}
+Phone: {{ current_user.individual_profile.phone }}
+Address: {{ current_user.individual_profile.address }} {% endif %}
+
+    <div class="col-md-8">
+        <h3>Order History</h3>
+        {% if orders %}
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Order ID</th>
+                            <th>Date</th>
+                            <th>Status</th>
+                            <th>Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for order in orders %}
+                        <tr>
+                            <td>{{ order.order_number }}</td>
+                            <td>{{ order.created_at.strftime('%Y-%m-%d') }}</td>
+                            <td>{{ order.status }}</td>
+                            <td>${{ "%.2f"|format(order.total_amount) }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        {% else %}
+            <p>No orders found.</p>
+        {% endif %}
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,265 @@
+{% extends "layout.html" %} {% block title %}FAQ - PureFlow{% endblock %} {%
+block content %}
+<section class="support-page">
+  <div class="container py-5">
+    <div class="row">
+      <div class="col-lg-8 mx-auto">
+        <h1 class="text-center mb-5" data-aos="fade-up">
+          Frequently Asked Questions
+        </h1>
+
+        <div
+          class="accordion"
+          id="faqAccordion"
+          data-aos="fade-up"
+          data-aos-delay="100"
+        >
+          <!-- Ordering Questions -->
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="headingOne">
+              <button
+                class="accordion-button"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#collapseOne"
+                aria-expanded="true"
+                aria-controls="collapseOne"
+              >
+                How do I place an order?
+              </button>
+            </h2>
+            <div
+              id="collapseOne"
+              class="accordion-collapse collapse show"
+              aria-labelledby="headingOne"
+              data-bs-parent="#faqAccordion"
+            >
+              <div class="accordion-body">
+                You can place an order by browsing our products page, selecting
+                the items you want, and adding them to your cart. Once you're
+                ready to checkout, follow the prompts to complete your purchase.
+                You'll need to create an account or sign in to complete your
+                order.
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="headingTwo">
+              <button
+                class="accordion-button collapsed"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#collapseTwo"
+                aria-expanded="false"
+                aria-controls="collapseTwo"
+              >
+                What's the difference between one-time orders and subscriptions?
+              </button>
+            </h2>
+            <div
+              id="collapseTwo"
+              class="accordion-collapse collapse"
+              aria-labelledby="headingTwo"
+              data-bs-parent="#faqAccordion"
+            >
+              <div class="accordion-body">
+                One-time orders are single purchases delivered once.
+                Subscriptions are recurring deliveries at intervals you choose
+                (weekly, bi-weekly, or monthly). Subscriptions offer convenience
+                and discounted pricing compared to one-time orders.
+              </div>
+            </div>
+          </div>
+
+          <!-- Delivery Questions -->
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="headingThree">
+              <button
+                class="accordion-button collapsed"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#collapseThree"
+                aria-expanded="false"
+                aria-controls="collapseThree"
+              >
+                How long does delivery take?
+              </button>
+            </h2>
+            <div
+              id="collapseThree"
+              class="accordion-collapse collapse"
+              aria-labelledby="headingThree"
+              data-bs-parent="#faqAccordion"
+            >
+              <div class="accordion-body">
+                Standard delivery typically takes 2-3 business days. For
+                subscription customers, we deliver on your scheduled delivery
+                day. You can check your delivery status in your account
+                dashboard after placing an order.
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="headingFour">
+              <button
+                class="accordion-button collapsed"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#collapseFour"
+                aria-expanded="false"
+                aria-controls="collapseFour"
+              >
+                What areas do you deliver to?
+              </button>
+            </h2>
+            <div
+              id="collapseFour"
+              class="accordion-collapse collapse"
+              aria-labelledby="headingFour"
+              data-bs-parent="#faqAccordion"
+            >
+              <div class="accordion-body">
+                We currently deliver to most major metropolitan areas and
+                surrounding suburbs. You can check if we deliver to your area by
+                entering your zip code during checkout or on our subscription
+                page.
+              </div>
+            </div>
+          </div>
+
+          <!-- Product Questions -->
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="headingFive">
+              <button
+                class="accordion-button collapsed"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#collapseFive"
+                aria-expanded="false"
+                aria-controls="collapseFive"
+              >
+                Where does your water come from?
+              </button>
+            </h2>
+            <div
+              id="collapseFive"
+              class="accordion-collapse collapse"
+              aria-labelledby="headingFive"
+              data-bs-parent="#faqAccordion"
+            >
+              <div class="accordion-body">
+                Our water is sourced from carefully selected natural springs
+                known for their purity and mineral content. Each source
+                undergoes rigorous testing to ensure the highest quality
+                standards are met before bottling.
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="headingSix">
+              <button
+                class="accordion-button collapsed"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#collapseSix"
+                aria-expanded="false"
+                aria-controls="collapseSix"
+              >
+                Are your bottles recyclable?
+              </button>
+            </h2>
+            <div
+              id="collapseSix"
+              class="accordion-collapse collapse"
+              aria-labelledby="headingSix"
+              data-bs-parent="#faqAccordion"
+            >
+              <div class="accordion-body">
+                Yes, all our bottles are 100% recyclable. We also offer a bottle
+                return program for subscription customers to reduce
+                environmental impact. Learn more about our sustainability
+                initiatives on our About page.
+              </div>
+            </div>
+          </div>
+
+          <!-- Account Questions -->
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="headingSeven">
+              <button
+                class="accordion-button collapsed"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#collapseSeven"
+                aria-expanded="false"
+                aria-controls="collapseSeven"
+              >
+                How do I manage my subscription?
+              </button>
+            </h2>
+            <div
+              id="collapseSeven"
+              class="accordion-collapse collapse"
+              aria-labelledby="headingSeven"
+              data-bs-parent="#faqAccordion"
+            >
+              <div class="accordion-body">
+                You can manage your subscription through your account dashboard.
+                Log in to your account, go to "My Subscriptions," and you can
+                modify delivery frequency, skip deliveries, change products,
+                update payment methods, or pause/cancel your subscription.
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="headingEight">
+              <button
+                class="accordion-button collapsed"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#collapseEight"
+                aria-expanded="false"
+                aria-controls="collapseEight"
+              >
+                How do I contact customer support?
+              </button>
+            </h2>
+            <div
+              id="collapseEight"
+              class="accordion-collapse collapse"
+              aria-labelledby="headingEight"
+              data-bs-parent="#faqAccordion"
+            >
+              <div class="accordion-body">
+                You can reach our customer support team through our
+                <a href="{{ url_for('main.contact') }}">Contact page</a>, by
+                email at support@pureflow.com, or by phone at (800) 555-WATER
+                during business hours (Monday-Friday, 9am-5pm).
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="text-center mt-5" data-aos="fade-up" data-aos-delay="200">
+          <p>Can't find what you're looking for?</p>
+          <a href="{{ url_for('main.contact') }}" class="btn btn-custom"
+            >Contact Us</a
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %} {% block scripts %}
+<script>
+  // Initialize AOS
+  AOS.init({
+    duration: 800,
+    easing: "ease-in-out",
+  });
+</script>
+{% endblock %}

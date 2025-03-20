@@ -1,0 +1,1422 @@
+<!-- templates/product_detail.html -->
+{% extends "layout.html" %} {% block title %}{{ product.name }} - PureFlow{%
+endblock %} {% block content %}
+<section class="hero-small" data-aos="fade-in">
+  <div class="hero-content">
+    <h1 class="hero-title">{{ product.name }}</h1>
+    <p class="hero-subtitle">{{ product.category }}</p>
+  </div>
+</section>
+
+<section class="py-5">
+  <div class="container">
+    <div class="row">
+      <!-- Product Images Column -->
+      <div class="col-lg-6 mb-4 mb-lg-0" data-aos="fade-right">
+        <div class="product-images">
+          <div class="main-image mb-3">
+            <img
+              src="{{ url_for('static', filename='images/products/' + product.image) }}"
+              class="img-fluid rounded-lg shadow-sm"
+              alt="{{ product.name }}"
+              id="mainProductImage"
+            />
+          </div>
+          <div class="image-thumbnails d-flex">
+            <div
+              class="thumbnail me-2 active"
+              data-image="{{ url_for('static', filename='images/products/' + product.image) }}"
+            >
+              <img
+                src="{{ url_for('static', filename='images/products/' + product.image) }}"
+                class="img-fluid rounded"
+                alt="{{ product.name }}"
+              />
+            </div>
+            {% for i in range(1, 4) %}
+            <div
+              class="thumbnail me-2"
+              data-image="{{ url_for('static', filename='images/products/' + product.image.split('.')[0] + '-' + i|string + '.' + product.image.split('.')[1]) }}"
+            >
+              <img
+                src="{{ url_for('static', filename='images/products/' + product.image.split('.')[0] + '-' + i|string + '.' + product.image.split('.')[1]) }}"
+                class="img-fluid rounded"
+                alt="{{ product.name }} view {{ i }}"
+              />
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+
+      <!-- Product Info Column -->
+      <div class="col-lg-6" data-aos="fade-left">
+        <div class="product-info">
+          <div class="d-flex justify-content-between align-items-start mb-3">
+            <div>
+              <h2 class="mb-1">{{ product.name }}</h2>
+              <div class="product-meta d-flex align-items-center">
+                <div class="product-rating me-3">
+                  {% for i in range(1, 6) %} {% if i <= product.rating %}
+                  <i class="fas fa-star"></i>
+                  {% elif i - 0.5 <= product.rating %}
+                  <i class="fas fa-star-half-alt"></i>
+                  {% else %}
+                  <i class="far fa-star"></i>
+                  {% endif %} {% endfor %}
+                  <span class="ms-1">{{ product.rating }}</span>
+                </div>
+                <span class="text-muted">|</span>
+                <span class="ms-3 text-muted"
+                  >{{ product.reviews|length }} Reviews</span
+                >
+                <span class="text-muted">|</span>
+                <span class="ms-3 text-muted">{{ product.sold }} Sold</span>
+              </div>
+            </div>
+            <button class="btn btn-outline-secondary btn-sm add-to-wishlist">
+              <i class="far fa-heart"></i>
+            </button>
+          </div>
+
+          <div class="product-price mb-4">
+            {% if product.discount_price %}
+            <span class="h3 text-primary me-2"
+              >${{ "%.2f"|format(product.discount_price) }}</span
+            >
+            <span class="h5 text-muted text-decoration-line-through"
+              >${{ "%.2f"|format(product.price) }}</span
+            >
+            <span class="badge bg-danger ms-2"
+              >{{ ((1 - product.discount_price / product.price) * 100)|int }}%
+              OFF</span
+            >
+            {% else %}
+            <span class="h3 text-primary"
+              >${{ "%.2f"|format(product.price) }}</span
+            >
+            {% endif %}
+          </div>
+
+          <div class="product-description mb-4">
+            <p>{{ product.description }}</p>
+
+            <div class="product-features mt-3">
+              <h6 class="mb-2">Key Benefits:</h6>
+              <ul class="list-unstyled">
+                {% for benefit in product.benefits %}
+                <li class="mb-2">
+                  <i class="fas fa-check-circle text-success me-2"></i> {{
+                  benefit }}
+                </li>
+                {% endfor %}
+              </ul>
+            </div>
+          </div>
+
+          <div class="product-options mb-4">
+            <div class="size-options mb-3">
+              <label class="form-label">Size:</label>
+              <div class="d-flex flex-wrap">
+                {% for size in product.sizes %}
+                <div class="form-check size-option me-3 mb-2">
+                  <input
+                    class="form-check-input"
+                    type="radio"
+                    name="size"
+                    id="size{{ loop.index }}"
+                    value="{{ size.value }}"
+                    {%
+                    if
+                    loop.first
+                    %}checked{%
+                    endif
+                    %}
+                  />
+                  <label class="form-check-label" for="size{{ loop.index }}">
+                    {{ size.label }}
+                    <span class="size-price d-block text-muted"
+                      >${{ "%.2f"|format(size.price) }}</span
+                    >
+                  </label>
+                </div>
+                {% endfor %}
+              </div>
+            </div>
+
+            <div class="quantity-selector mb-4">
+              <label class="form-label">Quantity:</label>
+              <div class="d-flex align-items-center quantity-wrapper">
+                <button
+                  class="btn btn-outline-secondary quantity-btn"
+                  id="decreaseQuantity"
+                >
+                  <i class="fas fa-minus"></i>
+                </button>
+                <input
+                  type="number"
+                  class="form-control text-center mx-2"
+                  id="quantity"
+                  value="1"
+                  min="1"
+                  max="99"
+                />
+                <button
+                  class="btn btn-outline-secondary quantity-btn"
+                  id="increaseQuantity"
+                >
+                  <i class="fas fa-plus"></i>
+                </button>
+                <span class="ms-3 text-muted"
+                  >{{ product.stock }} available</span
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="product-actions d-flex flex-wrap mb-4">
+            <button
+              class="btn btn-custom btn-lg me-3 mb-2 mb-md-0 flex-grow-1"
+              id="addToCart"
+            >
+              <i class="fas fa-shopping-cart me-2"></i> Add to Cart
+            </button>
+            <button class="btn btn-primary btn-lg flex-grow-1" id="buyNow">
+              <i class="fas fa-bolt me-2"></i> Buy Now
+            </button>
+          </div>
+
+          <div class="product-meta-info">
+            <div class="d-flex flex-wrap">
+              <div class="me-4 mb-3">
+                <i class="fas fa-truck text-primary me-2"></i>
+                <span>Free shipping on orders over $50</span>
+              </div>
+              <div class="me-4 mb-3">
+                <i class="fas fa-undo text-primary me-2"></i>
+                <span>30-day return policy</span>
+              </div>
+              <div class="mb-3">
+                <i class="fas fa-shield-alt text-primary me-2"></i>
+                <span>Secure checkout</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="share-product mt-4">
+            <span class="me-3">Share:</span>
+            <a href="#" class="social-share me-2"
+              ><i class="fab fa-facebook-f"></i
+            ></a>
+            <a href="#" class="social-share me-2"
+              ><i class="fab fa-twitter"></i
+            ></a>
+            <a href="#" class="social-share me-2"
+              ><i class="fab fa-pinterest"></i
+            ></a>
+            <a href="#" class="social-share"><i class="fas fa-envelope"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Product Details Tabs -->
+<section class="py-5 bg-light">
+  <div class="container" data-aos="fade-up">
+    <ul class="nav nav-tabs product-tabs mb-4" id="productTabs" role="tablist">
+      <li class="nav-item" role="presentation">
+        <button
+          class="nav-link active"
+          id="details-tab"
+          data-bs-toggle="tab"
+          data-bs-target="#details"
+          type="button"
+          role="tab"
+          aria-controls="details"
+          aria-selected="true"
+        >
+          Product Details
+        </button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button
+          class="nav-link"
+          id="nutrition-tab"
+          data-bs-toggle="tab"
+          data-bs-target="#nutrition"
+          type="button"
+          role="tab"
+          aria-controls="nutrition"
+          aria-selected="false"
+        >
+          Nutrition Facts
+        </button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button
+          class="nav-link"
+          id="reviews-tab"
+          data-bs-toggle="tab"
+          data-bs-target="#reviews"
+          type="button"
+          role="tab"
+          aria-controls="reviews"
+          aria-selected="false"
+        >
+          Reviews ({{ product.reviews|length }})
+        </button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button
+          class="nav-link"
+          id="shipping-tab"
+          data-bs-toggle="tab"
+          data-bs-target="#shipping"
+          type="button"
+          role="tab"
+          aria-controls="shipping"
+          aria-selected="false"
+        >
+          Shipping & Returns
+        </button>
+      </li>
+    </ul>
+
+    <div class="tab-content" id="productTabsContent">
+      <!-- Product Details Tab -->
+      <div
+        class="tab-pane fade show active"
+        id="details"
+        role="tabpanel"
+        aria-labelledby="details-tab"
+      >
+        <div class="card border-0 shadow-sm">
+          <div class="card-body p-4">
+            <div class="row">
+              <div class="col-md-6 mb-4 mb-md-0">
+                <h4 class="mb-4">About {{ product.name }}</h4>
+                <p>{{ product.long_description }}</p>
+
+                <h5 class="mt-4 mb-3">Source</h5>
+                <p>
+                  Our {{ product.name }} is sourced from pristine natural
+                  springs located in the heart of the mountains, where the water
+                  is naturally filtered through layers of rock and mineral
+                  deposits, resulting in a pure and refreshing taste.
+                </p>
+
+                <h5 class="mt-4 mb-3">Quality Assurance</h5>
+                <p>
+                  Every batch of our water undergoes rigorous testing to ensure
+                  it meets our high standards for purity and quality. We test
+                  for over 150 different compounds to guarantee that you receive
+                  only the cleanest, safest water possible.
+                </p>
+              </div>
+
+              <div class="col-md-6">
+                <h4 class="mb-4">Specifications</h4>
+                <table class="table table-striped">
+                  <tbody>
+                    <tr>
+                      <th scope="row">Product Type</th>
+                      <td>{{ product.category }}</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">pH Level</th>
+                      <td>{{ product.ph_level }}</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">TDS (Total Dissolved Solids)</th>
+                      <td>{{ product.tds }} mg/L</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Bottle Material</th>
+                      <td>{{ product.bottle_material }}</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Recyclable</th>
+                      <td>{{ "Yes" if product.recyclable else "No" }}</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Shelf Life</th>
+                      <td>{{ product.shelf_life }}</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Storage</th>
+                      <td>
+                        Store in a cool, dry place away from direct sunlight
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Nutrition Facts Tab -->
+      <div
+        class="tab-pane fade"
+        id="nutrition"
+        role="tabpanel"
+        aria-labelledby="nutrition-tab"
+      >
+        <div class="card border-0 shadow-sm">
+          <div class="card-body p-4">
+            <div class="row">
+              <div class="col-md-6 mb-4 mb-md-0">
+                <h4 class="mb-4">Nutrition Facts</h4>
+                <div class="nutrition-facts">
+                  <table class="table table-bordered">
+                    <tbody>
+                      <tr>
+                        <th colspan="2" class="text-center">Nutrition Facts</th>
+                      </tr>
+                      <tr>
+                        <td colspan="2">
+                          <strong>Serving Size:</strong> 8 fl oz (240mL)
+                        </td>
+                      </tr>
+                      <tr>
+                        <td colspan="2">
+                          <strong>Servings Per Container:</strong> Varies by
+                          size
+                        </td>
+                      </tr>
+                      <tr>
+                        <th colspan="2" class="text-center">
+                          Amount Per Serving
+                        </th>
+                      </tr>
+                      <tr>
+                        <td><strong>Calories</strong></td>
+                        <td>0</td>
+                      </tr>
+                      <tr>
+                        <td><strong>Total Fat</strong></td>
+                        <td>0g</td>
+                      </tr>
+                      <tr>
+                        <td><strong>Sodium</strong></td>
+                        <td>{{ product.sodium }}mg</td>
+                      </tr>
+                      <tr>
+                        <td><strong>Total Carbohydrate</strong></td>
+                        <td>0g</td>
+                      </tr>
+                      <tr>
+                        <td><strong>Protein</strong></td>
+                        <td>0g</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <h4 class="mb-4">Mineral Content</h4>
+                <div class="mineral-content">
+                  <table class="table table-bordered">
+                    <thead>
+                      <tr>
+                        <th>Mineral</th>
+                        <th>Amount (mg/L)</th>
+                        <th>% Daily Value*</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>Calcium</td>
+                        <td>{{ product.minerals.calcium }}</td>
+                        <td>
+                          {{ (product.minerals.calcium / 1000 * 100)|int }}%
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>Magnesium</td>
+                        <td>{{ product.minerals.magnesium }}</td>
+                        <td>
+                          {{ (product.minerals.magnesium / 400 * 100)|int }}%
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>Potassium</td>
+                        <td>{{ product.minerals.potassium }}</td>
+                        <td>
+                          {{ (product.minerals.potassium / 3500 * 100)|int }}%
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>Bicarbonate</td>
+                        <td>{{ product.minerals.bicarbonate }}</td>
+                        <td>-</td>
+                      </tr>
+                      <tr>
+                        <td>Silica</td>
+                        <td>{{ product.minerals.silica }}</td>
+                        <td>-</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <p class="small text-muted">
+                    *Percent Daily Values are based on a 2,000 calorie diet.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Reviews Tab -->
+      <div
+        class="tab-pane fade"
+        id="reviews"
+        role="tabpanel"
+        aria-labelledby="reviews-tab"
+      >
+        <div class="card border-0 shadow-sm">
+          <div class="card-body p-4">
+            <div class="row">
+              <div class="col-md-4 mb-4 mb-md-0">
+                <div class="review-summary text-center">
+                  <h4 class="mb-4">Customer Reviews</h4>
+                  <div class="overall-rating mb-3">
+                    <span class="display-4 fw-bold text-primary"
+                      >{{ product.rating }}</span
+                    >
+                    <div class="rating-stars my-2">
+                      {% for i in range(1, 6) %} {% if i <= product.rating %}
+                      <i class="fas fa-star fa-lg"></i>
+                      {% elif i - 0.5 <= product.rating %}
+                      <i class="fas fa-star-half-alt fa-lg"></i>
+                      {% else %}
+                      <i class="far fa-star fa-lg"></i>
+                      {% endif %} {% endfor %}
+                    </div>
+                    <p class="text-muted">
+                      Based on {{ product.reviews|length }} reviews
+                    </p>
+                  </div>
+
+                  <div class="rating-breakdown">
+                    {% for i in range(5, 0, -1) %}
+                    <div class="d-flex align-items-center mb-2">
+                      <div class="rating-label me-2">{{ i }} star</div>
+                      <div
+                        class="progress flex-grow-1 me-2"
+                        style="height: 8px"
+                      >
+                        {% set percentage = (product.rating_breakdown[i] /
+                        product.reviews|length * 100)|int if
+                        product.reviews|length > 0 else 0 %}
+                        <div
+                          class="progress-bar bg-primary"
+                          role="progressbar"
+                          style="width: {{ percentage }}%"
+                          aria-valuenow="{{ percentage }}"
+                          aria-valuemin="0"
+                          aria-valuemax="100"
+                        ></div>
+                      </div>
+                      <div class="rating-count small">
+                        {{ product.rating_breakdown[i] }}
+                      </div>
+                    </div>
+                    {% endfor %}
+                  </div>
+
+                  <button
+                    class="btn btn-custom mt-4"
+                    data-bs-toggle="modal"
+                    data-bs-target="#writeReviewModal"
+                  >
+                    <i class="fas fa-pen me-2"></i> Write a Review
+                  </button>
+                </div>
+              </div>
+
+              <div class="col-md-8">
+                <h4 class="mb-4">{{ product.reviews|length }} Reviews</h4>
+
+                <div
+                  class="review-filters d-flex flex-wrap align-items-center mb-4"
+                >
+                  <span class="me-3">Filter by:</span>
+                  <div class="btn-group me-3 mb-2 mb-md-0">
+                    <button
+                      type="button"
+                      class="btn btn-outline-secondary active"
+                    >
+                      All
+                    </button>
+                    <button type="button" class="btn btn-outline-secondary">
+                      5 Star
+                    </button>
+                    <button type="button" class="btn btn-outline-secondary">
+                      4 Star
+                    </button>
+                    <button type="button" class="btn btn-outline-secondary">
+                      3 Star
+                    </button>
+                    <button type="button" class="btn btn-outline-secondary">
+                      2 Star
+                    </button>
+                    <button type="button" class="btn btn-outline-secondary">
+                      1 Star
+                    </button>
+                  </div>
+
+                  <div class="dropdown ms-auto">
+                    <button
+                      class="btn btn-outline-secondary dropdown-toggle"
+                      type="button"
+                      id="sortReviews"
+                      data-bs-toggle="dropdown"
+                      aria-expanded="false"
+                    >
+                      Sort by: Most Recent
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="sortReviews">
+                      <li>
+                        <a class="dropdown-item active" href="#">Most Recent</a>
+                      </li>
+                      <li>
+                        <a class="dropdown-item" href="#">Highest Rating</a>
+                      </li>
+                      <li>
+                        <a class="dropdown-item" href="#">Lowest Rating</a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+
+                <div class="reviews-list">
+                  {% for review in product.reviews %}
+                  <div class="review-item mb-4">
+                    <div
+                      class="d-flex justify-content-between align-items-start mb-2"
+                    >
+                      <div class="d-flex align-items-center">
+                        <div class="reviewer-avatar me-3">
+                          <img
+                            src="{{ url_for('static', filename='images/avatars/' + review.avatar) }}"
+                            alt="{{ review.name }}"
+                            class="rounded-circle"
+                            width="50"
+                            height="50"
+                          />
+                        </div>
+                        <div>
+                          <h6 class="mb-1">{{ review.name }}</h6>
+                          <div class="d-flex align-items-center">
+                            <div class="review-rating me-2">
+                              {% for i in range(1, 6) %} {% if i <=
+                              review.rating %}
+                              <i class="fas fa-star"></i>
+                              {% else %}
+                              <i class="far fa-star"></i>
+                              {% endif %} {% endfor %}
+                            </div>
+                            <span class="text-muted small"
+                              >{{ review.date }}</span
+                            >
+                          </div>
+                        </div>
+                      </div>
+                      <div class="review-verified">
+                        {% if review.verified %}
+                        <span class="badge bg-success"
+                          ><i class="fas fa-check me-1"></i> Verified
+                          Purchase</span
+                        >
+                        {% endif %}
+                      </div>
+                    </div>
+
+                    <h6 class="review-title mb-2">{{ review.title }}</h6>
+                    <p class="review-text mb-2">{{ review.comment }}</p>
+
+                    {% if review.images %}
+                    <div class="review-images d-flex flex-wrap mb-3">
+                      {% for image in review.images %}
+                      <div class="review-image me-2 mb-2">
+                        <img
+                          src="{{ url_for('static', filename='images/reviews/' + image) }}"
+                          alt="Review image"
+                          class="img-thumbnail"
+                          width="80"
+                        />
+                      </div>
+                      {% endfor %}
+                    </div>
+                    {% endif %}
+
+                    <div class="review-actions d-flex align-items-center">
+                      <button class="btn btn-sm btn-outline-secondary me-2">
+                        <i class="far fa-thumbs-up me-1"></i> Helpful ({{
+                        review.helpful }})
+                      </button>
+                      <button class="btn btn-sm btn-outline-secondary">
+                        <i class="far fa-comment me-1"></i> Comment
+                      </button>
+                    </div>
+                  </div>
+                  {% endfor %}
+                </div>
+
+                <nav aria-label="Review pagination" class="mt-4">
+                  <ul class="pagination justify-content-center">
+                    <li class="page-item disabled">
+                      <a
+                        class="page-link"
+                        href="#"
+                        tabindex="-1"
+                        aria-disabled="true"
+                        >Previous</a
+                      >
+                    </li>
+                    <li class="page-item active">
+                      <a class="page-link" href="#">1</a>
+                    </li>
+                    <li class="page-item">
+                      <a class="page-link" href="#">2</a>
+                    </li>
+                    <li class="page-item">
+                      <a class="page-link" href="#">3</a>
+                    </li>
+                    <li class="page-item">
+                      <a class="page-link" href="#">Next</a>
+                    </li>
+                  </ul>
+                </nav>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Shipping & Returns Tab -->
+      <div
+        class="tab-pane fade"
+        id="shipping"
+        role="tabpanel"
+        aria-labelledby="shipping-tab"
+      >
+        <div class="card border-0 shadow-sm">
+          <div class="card-body p-4">
+            <div class="row">
+              <div class="col-md-6 mb-4 mb-md-0">
+                <h4 class="mb-4">Shipping Information</h4>
+                <div class="shipping-info">
+                  <div class="d-flex mb-4">
+                    <div class="icon-box me-3">
+                      <i class="fas fa-truck fa-2x text-primary"></i>
+                    </div>
+                    <div>
+                      <h5>Free Standard Shipping</h5>
+                      <p>
+                        Orders over $50 qualify for free standard shipping.
+                        Standard shipping typically takes 3-5 business days,
+                        depending on your location.
+                      </p>
+                    </div>
+                  </div>
+
+                  <div class="d-flex mb-4">
+                    <div class="icon-box me-3">
+                      <i class="fas fa-shipping-fast fa-2x text-primary"></i>
+                    </div>
+                    <div>
+                      <h5>Express Shipping</h5>
+                      <p>
+                        Need your water faster? Choose express shipping at
+                        checkout for delivery within 2-3 business days for an
+                        additional $9.99.
+                      </p>
+                    </div>
+                  </div>
+
+                  <div class="d-flex">
+                    <div class="icon-box me-3">
+                      <i class="fas fa-bolt fa-2x text-primary"></i>
+                    </div>
+                    <div>
+                      <h5>Overnight Shipping</h5>
+                      <p>
+                        For urgent orders, select overnight shipping at checkout
+                        for next business day delivery for an additional $19.99.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <h4 class="mb-4">Returns & Refunds</h4>
+                <div class="returns-info">
+                  <div class="d-flex mb-4">
+                    <div class="icon-box me-3">
+                      <i class="fas fa-undo fa-2x text-primary"></i>
+                    </div>
+                    <div>
+                      <h5>30-Day Return Policy</h5>
+                      <p>
+                        If you're not completely satisfied with your purchase,
+                        you can return it within 30 days for a full refund or
+                        exchange.
+                      </p>
+                    </div>
+                  </div>
+
+                  <div class="d-flex mb-4">
+                    <div class="icon-box me-3">
+                      <i class="fas fa-box-open fa-2x text-primary"></i>
+                    </div>
+                    <div>
+                      <h5>Return Conditions</h5>
+                      <p>
+                        Items must be unused, in their original packaging, and
+                        in the same condition you received them. Please include
+                        the original receipt or proof of purchase.
+                      </p>
+                    </div>
+                  </div>
+
+                  <div class="d-flex">
+                    <div class="icon-box me-3">
+                      <i class="fas fa-question-circle fa-2x text-primary"></i>
+                    </div>
+                    <div>
+                      <h5>Need Help?</h5>
+                      <p>
+                        If you have any questions about shipping or returns,
+                        please
+                        <a href="{{ url_for('main.contact') }}"
+                          >contact our customer service team</a
+                        >.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Related Products Section -->
+<section class="py-5">
+  <div class="container">
+    <h2 class="section-title text-center mb-5" data-aos="fade-up">
+      You May Also Like
+    </h2>
+
+    <div class="row">
+      {% for related_product in related_products %}
+      <div
+        class="col-md-3 mb-4"
+        data-aos="fade-up"
+        data-aos-delay="{{ loop.index * 100 }}"
+      >
+        <div class="card product-card h-100">
+          {% if related_product.badge %}
+          <div
+            class="product-badge bg-{{ related_product.badge_color }} text-white"
+          >
+            {{ related_product.badge }}
+          </div>
+          {% endif %}
+          <img
+            src="{{ url_for('static', filename='images/products/' + related_product.image) }}"
+            class="card-img-top"
+            alt="{{ related_product.name }}"
+          />
+          <div class="card-body">
+            <h5 class="card-title">{{ related_product.name }}</h5>
+            <div class="d-flex justify-content-between align-items-center mb-2">
+              <span class="product-category"
+                >{{ related_product.category }}</span
+              >
+              <div class="product-rating">
+                {% for i in range(1, 6) %} {% if i <= related_product.rating %}
+                <i class="fas fa-star"></i>
+                {% else %}
+                <i class="far fa-star"></i>
+                {% endif %} {% endfor %}
+              </div>
+            </div>
+            <p class="card-text">{{ related_product.short_description }}</p>
+            <div class="d-flex justify-content-between align-items-center">
+              {% if related_product.discount_price %}
+              <span class="price"
+                ><del class="text-muted me-2"
+                  >${{ "%.2f"|format(related_product.price) }}</del
+                >${{ "%.2f"|format(related_product.discount_price) }}</span
+              >
+              {% else %}
+              <span class="price"
+                >${{ "%.2f"|format(related_product.price) }}</span
+              >
+              {% endif %}
+              <a
+                href="{{ url_for('main.product_detail', product_id=related_product.id) }}"
+                class="btn btn-sm btn-custom"
+                >View Details</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- Write Review Modal -->
+<div
+  class="modal fade"
+  id="writeReviewModal"
+  tabindex="-1"
+  aria-labelledby="writeReviewModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="writeReviewModalLabel">Write a Review</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <form
+          id="reviewForm"
+          method="POST"
+          action="{{ url_for('main.submit_review', product_id=product.id) }}"
+          enctype="multipart/form-data"
+        >
+          <div class="mb-3">
+            <label class="form-label">Your Rating</label>
+            <div class="rating-input">
+              <div class="rating-stars">
+                {% for i in range(5, 0, -1) %}
+                <input
+                  type="radio"
+                  name="rating"
+                  id="rating-{{ i }}"
+                  value="{{ i }}"
+                />
+                <label for="rating-{{ i }}"><i class="far fa-star"></i></label>
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label for="reviewTitle" class="form-label">Review Title</label>
+            <input
+              type="text"
+              class="form-control"
+              id="reviewTitle"
+              name="title"
+              required
+            />
+          </div>
+
+          <div class="mb-3">
+            <label for="reviewComment" class="form-label">Your Review</label>
+            <textarea
+              class="form-control"
+              id="reviewComment"
+              name="comment"
+              rows="4"
+              required
+            ></textarea>
+          </div>
+
+          <div class="mb-3">
+            <label for="reviewImages" class="form-label"
+              >Upload Images (Optional)</label
+            >
+            <input
+              type="file"
+              class="form-control"
+              id="reviewImages"
+              name="images"
+              multiple
+              accept="image/*"
+            />
+            <div class="form-text">
+              You can upload up to 3 images. Max file size: 5MB each.
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                id="termsAgree"
+                required
+              />
+              <label class="form-check-label" for="termsAgree">
+                I agree to the
+                <a href="{{ url_for('main.terms') }}" target="_blank"
+                  >Terms of Service</a
+                >
+                and
+                <a href="{{ url_for('main.privacy') }}" target="_blank"
+                  >Privacy Policy</a
+                >
+              </label>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-outline-secondary"
+          data-bs-dismiss="modal"
+        >
+          Cancel
+        </button>
+        <button type="submit" form="reviewForm" class="btn btn-custom">
+          Submit Review
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %} {% block styles %}
+<style>
+  /* Product Images */
+  .main-image {
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  }
+
+  .main-image img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+  }
+
+  .thumbnail {
+    width: 80px;
+    height: 80px;
+    border-radius: 10px;
+    overflow: hidden;
+    cursor: pointer;
+    opacity: 0.7;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+  }
+
+  .thumbnail:hover {
+    opacity: 1;
+  }
+
+  .thumbnail.active {
+    opacity: 1;
+    border-color: var(--primary-color);
+  }
+
+  .thumbnail img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  /* Product Info */
+  .product-meta {
+    font-size: 0.9rem;
+  }
+
+  .product-rating {
+    color: #ffc107;
+  }
+
+  .product-features ul li {
+    position: relative;
+    padding-left: 25px;
+  }
+
+  .product-features ul li i {
+    position: absolute;
+    left: 0;
+    top: 4px;
+  }
+
+  /* Size Options */
+  .size-option {
+    border: 1px solid #dee2e6;
+    border-radius: 10px;
+    padding: 10px 15px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .size-option:hover {
+    background-color: #f8f9fa;
+  }
+
+  .size-option input:checked + label {
+    color: var(--primary-color);
+    font-weight: 600;
+  }
+
+  /* Quantity Selector */
+  .quantity-wrapper {
+    width: fit-content;
+  }
+
+  .quantity-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+  }
+
+  #quantity {
+    width: 60px;
+    text-align: center;
+  }
+
+  /* Social Share */
+  .social-share {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    background-color: #f8f9fa;
+    color: var(--text-color);
+    transition: all 0.3s ease;
+  }
+
+  .social-share:hover {
+    background-color: var(--primary-color);
+    color: white;
+    transform: translateY(-3px);
+  }
+
+  /* Product Tabs */
+  .product-tabs {
+    border-bottom: none;
+  }
+
+  .product-tabs .nav-link {
+    border: none;
+    border-radius: 30px;
+    padding: 10px 20px;
+    margin-right: 10px;
+    font-weight: 600;
+    color: var(--text-color);
+  }
+
+  .product-tabs .nav-link:hover {
+    background-color: #f8f9fa;
+  }
+
+  .product-tabs .nav-link.active {
+    background-color: var(--primary-color);
+    color: white;
+  }
+
+  /* Review Summary */
+  .rating-stars {
+    color: #ffc107;
+  }
+
+  .rating-label {
+    width: 60px;
+  }
+
+  .rating-count {
+    width: 30px;
+    text-align: right;
+  }
+
+  /* Review Items */
+  .review-item {
+    padding: 20px;
+    border-radius: 10px;
+    background-color: white;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+  }
+
+  .review-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  }
+
+  .reviewer-avatar img {
+    object-fit: cover;
+  }
+
+  .review-image img {
+    object-fit: cover;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .review-image img:hover {
+    transform: scale(1.05);
+  }
+
+  /* Shipping & Returns */
+  .icon-box {
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--light-color);
+    border-radius: 50%;
+    color: var(--primary-color);
+    transition: all 0.3s ease;
+  }
+
+  .shipping-info .d-flex:hover .icon-box,
+  .returns-info .d-flex:hover .icon-box {
+    background-color: var(--primary-color);
+    color: white;
+    transform: translateY(-5px);
+  }
+
+  /* Rating Input in Modal */
+  .rating-input {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+  }
+
+  .rating-input label {
+    color: #ddd;
+    font-size: 1.5rem;
+    padding: 0 5px;
+    cursor: pointer;
+  }
+
+  .rating-input input {
+    display: none;
+  }
+
+  .rating-input label:hover,
+  .rating-input label:hover ~ label,
+  .rating-input input:checked ~ label {
+    color: #ffc107;
+  }
+
+  .rating-input label:hover i,
+  .rating-input label:hover ~ label i,
+  .rating-input input:checked ~ label i {
+    content: "\f005";
+    font-weight: 900;
+  }
+</style>
+{% endblock %} {% block scripts %}
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Image thumbnails
+    const thumbnails = document.querySelectorAll('.thumbnail');
+    const mainImage = document.getElementById('mainProductImage');
+
+    thumbnails.forEach(thumbnail => {
+        thumbnail.addEventListener('click', function() {
+            // Update main image
+            mainImage.src = this.getAttribute('data-image');
+
+            // Update active state
+            thumbnails.forEach(t => t.classList.remove('active'));
+            this.classList.add('active');
+        });
+    });
+
+    // Quantity selector
+    const quantityInput = document.getElementById('quantity');
+    const decreaseBtn = document.getElementById('decreaseQuantity');
+    const increaseBtn = document.getElementById('increaseQuantity');
+
+    decreaseBtn.addEventListener('click', function() {
+        let value = parseInt(quantityInput.value);
+        if (value > 1) {
+            quantityInput.value = value - 1;
+        }
+    });
+
+    increaseBtn.addEventListener('click', function() {
+        let value = parseInt(quantityInput.value);
+        let max = parseInt(quantityInput.getAttribute('max'));
+        if (value < max) {
+            quantityInput.value = value + 1;
+        }
+    });
+
+    // Add to cart button
+    const addToCartBtn = document.getElementById('addToCart');
+    addToCartBtn.addEventListener('click', function() {
+        const productId = {{ product.id }};
+        const quantity = parseInt(quantityInput.value);
+        const size = document.querySelector('input[name="size"]:checked').value;
+
+        // Add animation
+        this.innerHTML = '<i class="fas fa-check me-2"></i> Added to Cart';
+        this.classList.add('btn-success');
+
+        // Send AJAX request to add to cart
+        fetch('/cart/add', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': getCsrfToken()
+            },
+            body: JSON.stringify({
+                product_id: productId,
+                quantity: quantity,
+                size: size
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                // Update cart count in navbar
+                const cartCountElement = document.querySelector('.nav-link .badge');
+                if (cartCountElement) {
+                    cartCountElement.textContent = data.cart_count;
+                }
+
+                // Reset button after 2 seconds
+                setTimeout(() => {
+                    addToCartBtn.innerHTML = '<i class="fas fa-shopping-cart me-2"></i> Add to Cart';
+                    addToCartBtn.classList.remove('btn-success');
+                }, 2000);
+            }
+        })
+        .catch(error => {
+            console.error('Error adding to cart:', error);
+            // Reset button
+            addToCartBtn.innerHTML = '<i class="fas fa-shopping-cart me-2"></i> Add to Cart';
+            addToCartBtn.classList.remove('btn-success');
+        });
+    });
+
+    // Buy now button
+    const buyNowBtn = document.getElementById('buyNow');
+    buyNowBtn.addEventListener('click', function() {
+        const productId = {{ product.id }};
+        const quantity = parseInt(quantityInput.value);
+        const size = document.querySelector('input[name="size"]:checked').value;
+
+        // Send AJAX request to add to cart
+        fetch('/cart/add', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': getCsrfToken()
+            },
+            body: JSON.stringify({
+                product_id: productId,
+                quantity: quantity,
+                size: size,
+                buy_now: true
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                // Redirect to checkout
+                window.location.href = '/checkout';
+            }
+        })
+        .catch(error => {
+            console.error('Error processing buy now:', error);
+        });
+    });
+
+    // Add to wishlist
+    const wishlistBtn = document.querySelector('.add-to-wishlist');
+    wishlistBtn.addEventListener('click', function() {
+        const icon = this.querySelector('i');
+
+        if (icon.classList.contains('far')) {
+            icon.classList.remove('far');
+            icon.classList.add('fas');
+            icon.classList.add('text-danger');
+
+            // Send AJAX request to add to wishlist
+            fetch('/wishlist/add', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': getCsrfToken()
+                },
+                body: JSON.stringify({
+                    product_id: {{ product.id }}
+                })
+            });
+        } else {
+            icon.classList.remove('fas');
+            icon.classList.remove('text-danger');
+            icon.classList.add('far');
+
+            // Send AJAX request to remove from wishlist
+            fetch('/wishlist/remove', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': getCsrfToken()
+                },
+                body: JSON.stringify({
+                    product_id: {{ product.id }}
+                })
+            });
+        }
+    });
+
+    // Review rating input
+    const ratingInputs = document.querySelectorAll('.rating-input input');
+    ratingInputs.forEach(input => {
+        input.addEventListener('change', function() {
+            const labels = document.querySelectorAll('.rating-input label i');
+            labels.forEach(label => {
+                label.className = 'far fa-star';
+            });
+
+            const checkedInput = document.querySelector('.rating-input input:checked');
+            if (checkedInput) {
+                const value = parseInt(checkedInput.value);
+                const stars = document.querySelectorAll('.rating-input label i');
+
+                for (let i = 0; i < value; i++) {
+                    stars[4 - i].className = 'fas fa-star';
+                }
+            }
+        });
+    });
+
+    // Helper function to get CSRF token
+    function getCsrfToken() {
+        return document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+    }
+  });
+</script>
+{% endblock %}

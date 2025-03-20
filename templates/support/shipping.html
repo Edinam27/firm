@@ -1,0 +1,136 @@
+{% extends "layout.html" %} {% block title %}Shipping Information - PureFlow{%
+endblock %} {% block content %}
+<section class="support-page">
+  <div class="container py-5">
+    <div class="row">
+      <div class="col-lg-8 mx-auto">
+        <h1 class="text-center mb-5" data-aos="fade-up">
+          Shipping Information
+        </h1>
+
+        <div class="card mb-4" data-aos="fade-up" data-aos-delay="100">
+          <div class="card-body">
+            <h3 class="card-title">Delivery Areas</h3>
+            <p>PureFlow currently delivers to the following areas:</p>
+            <ul>
+              <li>Major metropolitan areas and surrounding suburbs</li>
+              <li>Select rural areas within our service regions</li>
+            </ul>
+            <p>
+              To check if we deliver to your location, enter your zip code
+              during checkout or on our subscription page.
+            </p>
+          </div>
+        </div>
+
+        <div class="card mb-4" data-aos="fade-up" data-aos-delay="150">
+          <div class="card-body">
+            <h3 class="card-title">Delivery Timeframes</h3>
+            <p><strong>One-time Orders:</strong></p>
+            <ul>
+              <li>Standard Delivery: 2-3 business days</li>
+              <li>
+                Express Delivery: Next business day (additional fee applies)
+              </li>
+            </ul>
+
+            <p><strong>Subscription Orders:</strong></p>
+            <ul>
+              <li>Delivered on your scheduled delivery day</li>
+              <li>
+                Choose from weekly, bi-weekly, or monthly delivery schedules
+              </li>
+              <li>
+                Ability to customize delivery days based on your preference
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="card mb-4" data-aos="fade-up" data-aos-delay="200">
+          <div class="card-body">
+            <h3 class="card-title">Delivery Process</h3>
+            <ol>
+              <li>
+                <strong>Order Confirmation:</strong> You'll receive an email
+                confirmation once your order is placed.
+              </li>
+              <li>
+                <strong>Processing:</strong> Orders are typically processed
+                within 24 hours.
+              </li>
+              <li>
+                <strong>Shipping Notification:</strong> You'll receive an email
+                with tracking information when your order ships.
+              </li>
+              <li>
+                <strong>Delivery:</strong> Our delivery team will bring your
+                order to your doorstep.
+              </li>
+              <li>
+                <strong>Confirmation:</strong> For contactless delivery, we'll
+                send a delivery confirmation email.
+              </li>
+            </ol>
+          </div>
+        </div>
+
+        <div class="card mb-4" data-aos="fade-up" data-aos-delay="250">
+          <div class="card-body">
+            <h3 class="card-title">Shipping Fees</h3>
+            <p><strong>One-time Orders:</strong></p>
+            <ul>
+              <li>Orders under $50: $9.95 shipping fee</li>
+              <li>Orders $50-$99.99: $5.95 shipping fee</li>
+              <li>Orders $100+: Free shipping</li>
+              <li>Express Delivery: Additional $15 fee</li>
+            </ul>
+
+            <p><strong>Subscription Orders:</strong></p>
+            <ul>
+              <li>All subscription orders include free standard shipping</li>
+              <li>Express delivery options available for an additional fee</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="card mb-4" data-aos="fade-up" data-aos-delay="300">
+          <div class="card-body">
+            <h3 class="card-title">Special Delivery Instructions</h3>
+            <p>
+              You can add special delivery instructions during checkout, such
+              as:
+            </p>
+            <ul>
+              <li>Gate codes or building access information</li>
+              <li>
+                Preferred placement location (front door, side entrance, etc.)
+              </li>
+              <li>Delivery time preferences (morning, afternoon, evening)</li>
+            </ul>
+            <p>
+              For subscription customers, you can update your delivery
+              instructions at any time through your account dashboard.
+            </p>
+          </div>
+        </div>
+
+        <div class="text-center mt-5" data-aos="fade-up" data-aos-delay="350">
+          <p>Have questions about shipping or delivery?</p>
+          <a href="{{ url_for('main.contact') }}" class="btn btn-custom"
+            >Contact Us</a
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %} {% block scripts %}
+<script>
+  // Initialize AOS
+  AOS.init({
+    duration: 800,
+    easing: "ease-in-out",
+  });
+</script>
+{% endblock %}

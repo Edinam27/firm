@@ -1,0 +1,94 @@
+<!-- templates/order-confirmation.html -->
+{% extends "layout.html" %}
+
+{% block title %}Order Confirmed - PureFlow{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/order-confirmation.css') }}">
+<style>
+    .hero-small {
+        margin-top: 80px;
+        padding: 60px 0;
+    }
+    
+    .animated-bg {
+        margin-top: 80px;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<section class="hero-small" data-aos="fade-in">
+    <div class="container">
+
+
+    </div>
+</section>
+<section class="confirmation-section">
+    <div class="container">
+        <div class="confirmation-card" data-aos="fade-up">
+            <div class="success-animation">
+                <i class="fas fa-check-circle"></i>
+            </div>
+            <h1>Thank You for Your Order!</h1>
+            <p class="order-number">Order #{{ order.id }}</p>
+            
+            <div class="order-details">
+                <div class="shipping-info">
+                    <h3>Shipping Details</h3>
+                    <p>{{ order.shipping_address.full_name }}</p>
+                    <p>{{ order.shipping_address.street }}</p>
+                    <p>{{ order.shipping_address.city }}, {{ order.shipping_address.postal_code }}</p>
+                </div>
+
+                <div class="order-summary">
+                    <h3>Order Summary</h3>
+                    {% for item in order.items %}
+                    <div class="order-item">
+                        <div class="item-image">
+                            <img src="{{ url_for('static', filename='images/' + item.product.image) }}" 
+                                 alt="{{ item.product.name }}">
+                        </div>
+                        <div class="item-details">
+                            <h4>{{ item.product.name }}</h4>
+                            <p>Size: {{ item.size }} | Quantity: {{ item.quantity }}</p>
+                            <p class="item-price">${{ "%.2f"|format(item.total) }}</p>
+                        </div>
+                    </div>
+                    {% endfor %}
+
+                    <div class="total-summary">
+                        <div class="summary-row">
+                            <span>Subtotal</span>
+                            <span>${{ "%.2f"|format(order.subtotal) }}</span>
+                        </div>
+                        <div class="summary-row">
+                            <span>Shipping</span>
+                            <span>${{ "%.2f"|format(order.shipping) }}</span>
+                        </div>
+                        <div class="summary-row">
+                            <span>Tax</span>
+                            <span>${{ "%.2f"|format(order.tax) }}</span>
+                        </div>
+                        <div class="summary-row total">
+                            <span>Total</span>
+                            <span>${{ "%.2f"|format(order.total) }}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="next-steps">
+                <h3>What's Next?</h3>
+                <p>You will receive an email confirmation shortly with your order details.</p>
+                <p>Expected delivery: {{ order.expected_delivery_date.strftime('%B %d, %Y') }}</p>
+            </div>
+
+            <div class="action-buttons">
+                <a href="{{ url_for('main.products') }}" class="btn btn-custom">Continue Shopping</a>
+                <a href="{{ url_for('main.account_orders') }}" class="btn btn-custom-outline">View Orders</a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

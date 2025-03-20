@@ -1,0 +1,175 @@
+{% extends "base.html" %} {% block title %}Shipping Policy - Pure Water{%
+endblock %} {% block content %}
+<div class="container py-5">
+  <div class="row">
+    <div class="col-lg-8 mx-auto">
+      <h1 class="mb-4">Shipping & Delivery Policy</h1>
+
+      <div class="card shadow-sm mb-4">
+        <div class="card-body">
+          <h2 class="h4 mb-3">Delivery Areas</h2>
+          <p>Pure Water currently delivers to the following areas:</p>
+          <ul>
+            <li>
+              Metropolitan areas within a 50-mile radius of our distribution
+              centers
+            </li>
+            <li>
+              Select suburban and rural areas (check availability with your zip
+              code)
+            </li>
+          </ul>
+          <p>
+            To check if we deliver to your area, please enter your zip code on
+            our <a href="{{ url_for('main.products') }}">products page</a> or
+            contact our customer service team.
+          </p>
+        </div>
+      </div>
+
+      <div class="card shadow-sm mb-4">
+        <div class="card-body">
+          <h2 class="h4 mb-3">Delivery Timeframes</h2>
+          <p>For one-time orders:</p>
+          <ul>
+            <li><strong>Standard Delivery:</strong> 2-3 business days</li>
+            <li>
+              <strong>Express Delivery:</strong> Next business day (order by 2
+              PM)
+            </li>
+            <li>
+              <strong>Same-Day Delivery:</strong> Available in select areas
+              (order by 10 AM)
+            </li>
+          </ul>
+
+          <p>For subscription deliveries:</p>
+          <ul>
+            <li>
+              Deliveries are made according to your selected frequency (weekly,
+              bi-weekly, or monthly)
+            </li>
+            <li>
+              You can select your preferred delivery day during subscription
+              setup
+            </li>
+            <li>
+              We'll notify you via email or text message the day before your
+              scheduled delivery
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="card shadow-sm mb-4">
+        <div class="card-body">
+          <h2 class="h4 mb-3">Shipping Fees</h2>
+          <p>Our shipping fees are calculated based on:</p>
+          <ul>
+            <li>Delivery location</li>
+            <li>Order volume</li>
+            <li>Delivery speed</li>
+          </ul>
+
+          <p>Standard shipping rates:</p>
+          <ul>
+            <li><strong>Orders under $30:</strong> $5.99 shipping fee</li>
+            <li><strong>Orders $30-$50:</strong> $3.99 shipping fee</li>
+            <li><strong>Orders over $50:</strong> FREE standard shipping</li>
+          </ul>
+
+          <p>Additional fees may apply for:</p>
+          <ul>
+            <li>Express delivery: +$8.99</li>
+            <li>Same-day delivery: +$12.99</li>
+            <li>Remote locations: Additional fees may apply</li>
+          </ul>
+
+          <p>
+            <strong>Subscription customers:</strong> All subscription plans
+            include FREE standard delivery.
+          </p>
+        </div>
+      </div>
+
+      <div class="card shadow-sm mb-4">
+        <div class="card-body">
+          <h2 class="h4 mb-3">Delivery Process</h2>
+          <p>What to expect on delivery day:</p>
+          <ul>
+            <li>Our delivery personnel will bring your order to your door</li>
+            <li>
+              For water cooler bottles and heavy items, we offer placement
+              service to your preferred location
+            </li>
+            <li>
+              Empty bottles can be left outside for collection during your next
+              delivery
+            </li>
+          </ul>
+
+          <p>Special instructions:</p>
+          <ul>
+            <li>You can add delivery instructions during checkout</li>
+            <li>
+              If you need to change delivery instructions, please contact us at
+              least 24 hours before delivery
+            </li>
+            <li>
+              For apartment buildings or offices, please ensure we have proper
+              access information
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="card shadow-sm mb-4">
+        <div class="card-body">
+          <h2 class="h4 mb-3">Tracking Your Order</h2>
+          <p>Stay updated on your delivery:</p>
+          <ul>
+            <li>
+              You'll receive a confirmation email when your order is placed
+            </li>
+            <li>
+              A tracking notification will be sent when your order is out for
+              delivery
+            </li>
+            <li>
+              For subscription customers, you'll receive a reminder email the
+              day before your scheduled delivery
+            </li>
+          </ul>
+
+          <p>You can also track your order status by:</p>
+          <ul>
+            <li>Logging into your account on our website</li>
+            <li>Using our mobile app</li>
+            <li>Contacting our customer service team</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="card shadow-sm">
+        <div class="card-body">
+          <h2 class="h4 mb-3">Delivery Issues</h2>
+          <p>If you experience any issues with your delivery:</p>
+          <ul>
+            <li>Contact our customer service team within 24 hours</li>
+            <li>For damaged products, please take photos if possible</li>
+            <li>
+              If you miss a delivery, we'll leave a notification and attempt
+              redelivery on the next business day
+            </li>
+          </ul>
+
+          <p>
+            For any questions about our shipping and delivery policy, please
+            <a href="{{ url_for('main.contact') }}">contact us</a>.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

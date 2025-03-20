@@ -1,0 +1,682 @@
+<!-- templates/products.html -->
+{% extends "layout.html" %} {% block title %}Our Products - PureFlow{% endblock
+%} {% block content %}
+<section class="hero-small" data-aos="fade-in">
+  <div class="hero-content">
+    <h1 class="hero-title">Our Products</h1>
+    <p class="hero-subtitle">Premium water for every need</p>
+  </div>
+</section>
+
+<section class="py-5">
+  <div class="container">
+    <div class="row">
+      <!-- Filters Sidebar -->
+      <div class="col-lg-3 mb-4 mb-lg-0" data-aos="fade-right">
+        <div class="card border-0 shadow-sm">
+          <div class="card-body">
+            <h5 class="mb-4">Filter Products</h5>
+
+            <div class="mb-4">
+              <h6 class="fw-bold mb-3">Categories</h6>
+              <div class="form-check mb-2">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  value=""
+                  id="category1"
+                  checked
+                />
+                <label class="form-check-label" for="category1">
+                  Spring Water
+                </label>
+              </div>
+              <div class="form-check mb-2">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  value=""
+                  id="category2"
+                  checked
+                />
+                <label class="form-check-label" for="category2">
+                  Mineral Water
+                </label>
+              </div>
+              <div class="form-check mb-2">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  value=""
+                  id="category3"
+                  checked
+                />
+                <label class="form-check-label" for="category3">
+                  Alkaline Water
+                </label>
+              </div>
+              <div class="form-check mb-2">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  value=""
+                  id="category4"
+                  checked
+                />
+                <label class="form-check-label" for="category4">
+                  Sparkling Water
+                </label>
+              </div>
+            </div>
+
+            <div class="mb-4">
+              <h6 class="fw-bold mb-3">Size</h6>
+              <div class="form-check mb-2">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  value=""
+                  id="size1"
+                  checked
+                />
+                <label class="form-check-label" for="size1"> 500ml </label>
+              </div>
+              <div class="form-check mb-2">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  value=""
+                  id="size2"
+                  checked
+                />
+                <label class="form-check-label" for="size2"> 1 Liter </label>
+              </div>
+              <div class="form-check mb-2">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  value=""
+                  id="size3"
+                  checked
+                />
+                <label class="form-check-label" for="size3"> 5 Liter </label>
+              </div>
+              <div class="form-check mb-2">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  value=""
+                  id="size4"
+                  checked
+                />
+                <label class="form-check-label" for="size4"> 20 Liter </label>
+              </div>
+            </div>
+
+            <div class="mb-4">
+              <h6 class="fw-bold mb-3">Price Range</h6>
+              <div class="range-slider">
+                <input
+                  type="range"
+                  class="form-range"
+                  min="0"
+                  max="100"
+                  id="priceRange"
+                />
+                <div class="d-flex justify-content-between">
+                  <span>$0</span>
+                  <span>$100</span>
+                </div>
+              </div>
+            </div>
+
+            <button class="btn btn-custom w-100">Apply Filters</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Products Grid -->
+      <div class="col-lg-9">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+          <div data-aos="fade-right">
+            <h2 class="mb-0">All Products</h2>
+            <p class="text-muted">Showing 12 products</p>
+          </div>
+          <div class="d-flex align-items-center" data-aos="fade-left">
+            <label for="sortOptions" class="me-2">Sort by:</label>
+            <select class="form-select form-select-sm" id="sortOptions">
+              <option selected>Featured</option>
+              <option>Price: Low to High</option>
+              <option>Price: High to Low</option>
+              <option>Newest</option>
+              <option>Best Selling</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="row">
+          <!-- Product 1 -->
+          <div class="col-md-4 mb-4" data-aos="fade-up">
+            <div class="card product-card h-100">
+              <div class="product-badge bg-primary text-white">Best Seller</div>
+              <img
+                src="{{ url_for('static', filename='images/spring-water.jpg') }}"
+                class="card-img-top"
+                alt="Spring Water"
+              />
+              <div class="card-body">
+                <h5 class="card-title">Natural Spring Water</h5>
+                <div
+                  class="d-flex justify-content-between align-items-center mb-2"
+                >
+                  <span class="product-category">Spring Water</span>
+                  <div class="product-rating">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star-half-alt"></i>
+                    <span class="ms-1">4.5</span>
+                  </div>
+                </div>
+                <p class="card-text">
+                  Pure natural spring water sourced from protected mountain
+                  springs.
+                </p>
+                <div class="product-sizes mb-3">
+                  <span class="size-option active">500ml</span>
+                  <span class="size-option">1L</span>
+                  <span class="size-option">5L</span>
+                </div>
+                <div class="d-flex justify-content-between align-items-center">
+                  <span class="price">$24.99</span>
+                  <div class="btn-group">
+                    <button class="btn btn-sm btn-outline-secondary">
+                      <i class="far fa-heart"></i>
+                    </button>
+                    <button class="btn btn-sm btn-custom">Add to Cart</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Product 2 -->
+          <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="100">
+            <div class="card product-card h-100">
+              <img
+                src="{{ url_for('static', filename='images/glass.jpg') }}"
+                class="card-img-top"
+                alt="Mineral Water"
+              />
+              <div class="card-body">
+                <h5 class="card-title">Premium Mineral Water</h5>
+                <div
+                  class="d-flex justify-content-between align-items-center mb-2"
+                >
+                  <span class="product-category">Mineral Water</span>
+                  <div class="product-rating">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="far fa-star"></i>
+                    <span class="ms-1">4.0</span>
+                  </div>
+                </div>
+                <p class="card-text">
+                  Naturally enriched with essential minerals for improved
+                  health.
+                </p>
+                <div class="product-sizes mb-3">
+                  <span class="size-option active">500ml</span>
+                  <span class="size-option">1L</span>
+                  <span class="size-option">5L</span>
+                </div>
+                <div class="d-flex justify-content-between align-items-center">
+                  <span class="price">$29.99</span>
+                  <div class="btn-group">
+                    <button class="btn btn-sm btn-outline-secondary">
+                      <i class="far fa-heart"></i>
+                    </button>
+                    <button class="btn btn-sm btn-custom">Add to Cart</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Product 3 -->
+          <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="200">
+            <div class="card product-card h-100">
+              <div class="product-badge bg-success text-white">New</div>
+              <img
+                src="{{ url_for('static', filename='images/bulk.webp') }}"
+                class="card-img-top"
+                alt="Alkaline Water"
+              />
+              <div class="card-body">
+                <h5 class="card-title">Alkaline Water</h5>
+                <div
+                  class="d-flex justify-content-between align-items-center mb-2"
+                >
+                  <span class="product-category">Alkaline Water</span>
+                  <div class="product-rating">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <span class="ms-1">5.0</span>
+                  </div>
+                </div>
+                <p class="card-text">
+                  Higher pH water that helps balance your body's acidity levels.
+                </p>
+                <div class="product-sizes mb-3">
+                  <span class="size-option active">500ml</span>
+                  <span class="size-option">1L</span>
+                  <span class="size-option">5L</span>
+                </div>
+                <div class="d-flex justify-content-between align-items-center">
+                  <span class="price">$34.99</span>
+                  <div class="btn-group">
+                    <button class="btn btn-sm btn-outline-secondary">
+                      <i class="far fa-heart"></i>
+                    </button>
+                    <button class="btn btn-sm btn-custom">Add to Cart</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Product 4 -->
+          <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="300">
+            <div class="card product-card h-100">
+              <img
+                src="{{ url_for('static', filename='images/sparkling-water.jpg') }}"
+                class="card-img-top"
+                alt="Sparkling Water"
+              />
+              <div class="card-body">
+                <h5 class="card-title">Sparkling Water</h5>
+                <div
+                  class="d-flex justify-content-between align-items-center mb-2"
+                >
+                  <span class="product-category">Sparkling Water</span>
+                  <div class="product-rating">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star-half-alt"></i>
+                    <i class="far fa-star"></i>
+                    <span class="ms-1">3.5</span>
+                  </div>
+                </div>
+                <p class="card-text">
+                  Refreshing carbonated water with a crisp, bubbly taste.
+                </p>
+                <div class="product-sizes mb-3">
+                  <span class="size-option active">500ml</span>
+                  <span class="size-option">1L</span>
+                </div>
+                <div class="d-flex justify-content-between align-items-center">
+                  <span class="price">$26.99</span>
+                  <div class="btn-group">
+                    <button class="btn btn-sm btn-outline-secondary">
+                      <i class="far fa-heart"></i>
+                    </button>
+                    <button class="btn btn-sm btn-custom">Add to Cart</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Product 5 -->
+          <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="400">
+            <div class="card product-card h-100">
+              <div class="product-badge bg-danger text-white">Sale</div>
+              <img
+                src="{{ url_for('static', filename='images/flavored-water.jpg') }}"
+                class="card-img-top"
+                alt="Flavored Water"
+              />
+              <div class="card-body">
+                <h5 class="card-title">Flavored Spring Water</h5>
+                <div
+                  class="d-flex justify-content-between align-items-center mb-2"
+                >
+                  <span class="product-category">Spring Water</span>
+                  <div class="product-rating">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="far fa-star"></i>
+                    <span class="ms-1">4.0</span>
+                  </div>
+                </div>
+                <p class="card-text">
+                  Natural spring water with a hint of fruit flavor. No sugar
+                  added.
+                </p>
+                <div class="product-sizes mb-3">
+                  <span class="size-option active">500ml</span>
+                  <span class="size-option">1L</span>
+                </div>
+                <div class="d-flex justify-content-between align-items-center">
+                  <span class="price"
+                    ><del class="text-muted me-2">$27.99</del> $22.99</span
+                  >
+                  <div class="btn-group">
+                    <button class="btn btn-sm btn-outline-secondary">
+                      <i class="far fa-heart"></i>
+                    </button>
+                    <button class="btn btn-sm btn-custom">Add to Cart</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Product 6 -->
+          <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="500">
+            <div class="card product-card h-100">
+              <img
+                src="{{ url_for('static', filename='images/dispenser.jpg') }}"
+                class="card-img-top"
+                alt="Water Dispenser"
+              />
+              <div class="card-body">
+                <h5 class="card-title">Water Dispenser</h5>
+                <div
+                  class="d-flex justify-content-between align-items-center mb-2"
+                >
+                  <span class="product-category">Accessories</span>
+                  <div class="product-rating">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star-half-alt"></i>
+                    <span class="ms-1">4.5</span>
+                  </div>
+                </div>
+                <p class="card-text">
+                  Modern water dispenser compatible with all our 20L bottles.
+                </p>
+                <div class="product-sizes mb-3">
+                  <span class="size-option active">Standard</span>
+                  <span class="size-option">Premium</span>
+                </div>
+                <div class="d-flex justify-content-between align-items-center">
+                  <span class="price">$89.99</span>
+                  <div class="btn-group">
+                    <button class="btn btn-sm btn-outline-secondary">
+                      <i class="far fa-heart"></i>
+                    </button>
+                    <button class="btn btn-sm btn-custom">Add to Cart</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+        
+    <!-- Pagination -->
+    <nav aria-label="Product pagination" class="mt-4" data-aos="fade-up">
+      <ul class="pagination justify-content-center">
+        <li class="page-item disabled">
+          <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+        </li>
+        <li class="page-item active">
+          <a class="page-link" href="#">1</a>
+        </li>
+        <li class="page-item"><a class="page-link" href="#">2</a></li>
+        <li class="page-item"><a class="page-link" href="#">3</a></li>
+        <li class="page-item">
+          <a class="page-link" href="#">Next</a>
+        </li>
+      </ul>
+    </nav>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %} {% block scripts %}
+
+<script src="{{ url_for('static', filename='js/cart.js') }}"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    // Size selection
+    const sizeOptions = document.querySelectorAll(".size-option");
+    sizeOptions.forEach((option) => {
+      option.addEventListener("click", function () {
+        // Remove active class from siblings
+        const siblings = this.parentElement.querySelectorAll(".size-option");
+        siblings.forEach((sib) => sib.classList.remove("active"));
+
+        // Add active class to clicked option
+        this.classList.add("active");
+      });
+    });
+
+    // Favorite toggle
+    const favoriteButtons = document.querySelectorAll(".btn-outline-secondary");
+    favoriteButtons.forEach((button) => {
+      button.addEventListener("click", function () {
+        const icon = this.querySelector("i");
+        if (icon.classList.contains("far")) {
+          icon.classList.remove("far");
+          icon.classList.add("fas");
+          icon.classList.add("text-danger");
+        } else {
+          icon.classList.remove("fas");
+          icon.classList.remove("text-danger");
+          icon.classList.add("far");
+        }
+      });
+    });
+
+    // Make sure Add to Cart buttons work
+    const addToCartButtons = document.querySelectorAll('.btn-custom');
+    addToCartButtons.forEach(button => {
+      if (button.textContent.trim() === 'Add to Cart') {
+        button.addEventListener('click', function() {
+          // Get product information
+          const productCard = this.closest('.product-card');
+          if (!productCard) return;
+          
+          const productName = productCard.querySelector('.card-title').textContent;
+          const productCategory = productCard.querySelector('.product-category') ? 
+                                 productCard.querySelector('.product-category').textContent : 'Product';
+          
+          // Get price
+          const priceElement = productCard.querySelector('.price');
+          const priceText = priceElement.textContent.replace('$', '').trim();
+          const price = parseFloat(priceText);
+          
+          // Get selected size
+          const sizeElement = productCard.querySelector('.size-option.active');
+          const size = sizeElement ? sizeElement.textContent.trim() : 'Standard';
+          
+          // Get product image
+          const imageElement = productCard.querySelector('.card-img-top');
+          const imageUrl = imageElement ? imageElement.getAttribute('src') : '';
+          
+          // Create product object
+          const product = {
+            id: `${productName.replace(/\s+/g, '-').toLowerCase()}-${size.toLowerCase()}`,
+            name: productName,
+            category: productCategory,
+            price: price,
+            size: size,
+            quantity: 1,
+            imageUrl: imageUrl
+          };
+          
+          // Add to cart
+          if (window.Cart) {
+            Cart.addItem(product);
+            console.log('Added to cart:', product);
+          } else {
+            console.error('Cart object not found. Check if cart.js is loaded correctly.');
+          }
+        });
+      }
+    });
+  });
+</script>
+{% endblock %}
+
+{% block styles %}
+<style>
+  .product-card {
+    transition: all 0.3s ease;
+    border: none;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+    position: relative;
+  }
+
+  .product-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+  }
+
+  .product-badge {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    z-index: 1;
+  }
+
+  .product-category {
+    font-size: 0.8rem;
+    color: #6c757d;
+    font-weight: 500;
+  }
+
+  .product-rating {
+    font-size: 0.8rem;
+    color: #ffc107;
+  }
+
+  .product-sizes {
+    display: flex;
+    gap: 5px;
+  }
+
+  .size-option {
+    display: inline-block;
+    padding: 5px 10px;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .size-option:hover {
+    background-color: #f8f9fa;
+  }
+
+  .size-option.active {
+    background-color: var(--primary-color);
+    color: white;
+    border-color: var(--primary-color);
+  }
+
+  .price {
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: var(--primary-color);
+  }
+
+  .btn-group {
+    gap: 5px;
+  }
+</style>
+
+<link rel="stylesheet" href="{{ url_for('static', filename='css/pagination.css') }}">
+<style>
+  .product-card {
+    transition: all 0.3s ease;
+    border: none;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+    position: relative;
+  }
+
+  .product-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+  }
+
+  .product-badge {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    z-index: 1;
+  }
+
+  .product-category {
+    font-size: 0.8rem;
+    color: #6c757d;
+    font-weight: 500;
+  }
+
+  .product-rating {
+    font-size: 0.8rem;
+    color: #ffc107;
+  }
+
+  .product-sizes {
+    display: flex;
+    gap: 5px;
+  }
+
+  .size-option {
+    display: inline-block;
+    padding: 5px 10px;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .size-option:hover {
+    background-color: #f8f9fa;
+  }
+
+  .size-option.active {
+    background-color: var(--primary-color);
+    color: white;
+    border-color: var(--primary-color);
+  }
+
+  .price {
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: var(--primary-color);
+  }
+
+  .btn-group {
+    gap: 5px;
+  }
+</style>
+{% endblock %}

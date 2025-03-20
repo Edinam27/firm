@@ -1,0 +1,583 @@
+<!-- templates/checkout.html -->
+{% extends "layout.html" %}
+
+{% block title %}Checkout - PureFlow{% endblock %}
+
+{% block content %}
+<section class="hero-small" data-aos="fade-in">
+    <div class="hero-content">
+        <h1 class="hero-title">Checkout</h1>
+        <p class="hero-subtitle">Complete your purchase</p>
+    </div>
+</section>
+
+<section class="py-5">
+    <div class="container">
+        <div class="row">
+            <!-- Checkout Form Column -->
+            <div class="col-lg-8 mb-4 mb-lg-0" data-aos="fade-up">
+                <div class="card border-0 shadow-sm">
+                    <div class="card-body p-4">
+                        <h3 class="mb-4">Shipping Information</h3>
+                        
+                        {% with messages = get_flashed_messages(with_categories=true) %}
+                            {% if messages %}
+                                {% for category, message in messages %}
+                                    <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                                        {{ message }}
+                                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                    </div>
+                                {% endfor %}
+                            {% endif %}
+                        {% endwith %}
+                        
+                        <form method="POST" action="{{ url_for('main.checkout') }}" class="needs-validation" novalidate>
+                            {{ form.hidden_tag() }}
+                            
+                            <!-- Contact Information -->
+                            <div class="mb-4">
+                                <h5 class="mb-3">Contact Information</h5>
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label for="firstName" class="form-label">First Name</label>
+                                        <input type="text" class="form-control" id="firstName" name="firstName" value="{{ current_user.first_name if current_user.is_authenticated else '' }}" required>
+                                        <div class="invalid-feedback">
+                                            Please enter your first name.
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="col-md-6 mb-3">
+                                        <label for="lastName" class="form-label">Last Name</label>
+                                        <input type="text" class="form-control" id="lastName" name="lastName" value="{{ current_user.last_name if current_user.is_authenticated else '' }}" required>
+                                        <div class="invalid-feedback">
+                                            Please enter your last name.
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label for="email" class="form-label">Email Address</label>
+                                        <input type="email" class="form-control" id="email" name="email" value="{{ current_user.email if current_user.is_authenticated else '' }}" required>
+                                        <div class="invalid-feedback">
+                                            Please enter a valid email address.
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="col-md-6 mb-3">
+                                        <label for="phone" class="form-label">Phone Number</label>
+                                        <input type="tel" class="form-control" id="phone" name="phone" value="{{ current_user.phone if current_user.is_authenticated else '' }}" required>
+                                        <div class="invalid-feedback">
+                                            Please enter your phone number.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Shipping Address -->
+                            <div class="mb-4">
+                                <h5 class="mb-3">Shipping Address</h5>
+                                <div class="mb-3">
+                                    <label for="address" class="form-label">Street Address</label>
+                                    <input type="text" class="form-control" id="address" name="address" value="{{ current_user.address if current_user.is_authenticated else '' }}" required>
+                                    <div class="invalid-feedback">
+                                        Please enter your street address.
+                                    </div>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="addressLine2" class="form-label">Apartment, Suite, etc. (Optional)</label>
+                                    <input type="text" class="form-control" id="addressLine2" name="addressLine2" value="{{ current_user.address_line2 if current_user.is_authenticated else '' }}">
+                                </div>
+                                
+                                <div class="row">
+                                    <div class="col-md-5 mb-3">
+                                        <label for="city" class="form-label">City</label>
+                                        <input type="text" class="form-control" id="city" name="city" value="{{ current_user.city if current_user.is_authenticated else '' }}" required>
+                                        <div class="invalid-feedback">
+                                            Please enter your city.
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="col-md-4 mb-3">
+                                        <label for="state" class="form-label">State</label>
+                                        <select class="form-select" id="state" name="state" required>
+                                            <option value="">Choose...</option>
+                                            <option value="AL" {% if current_user.is_authenticated and current_user.state == 'AL' %}selected{% endif %}>Alabama</option>
+                                            <option value="AK" {% if current_user.is_authenticated and current_user.state == 'AK' %}selected{% endif %}>Alaska</option>
+                                            <option value="AZ" {% if current_user.is_authenticated and current_user.state == 'AZ' %}selected{% endif %}>Arizona</option>
+                                            <!-- Add all states here -->
+                                            <option value="WY" {% if current_user.is_authenticated and current_user.state == 'WY' %}selected{% endif %}>Wyoming</option>
+                                        </select>
+                                        <div class="invalid-feedback">
+                                            Please select your state.
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="col-md-3 mb-3">
+                                        <label for="zip" class="form-label">Zip Code</label>
+                                        <input type="text" class="form-control" id="zip" name="zip" value="{{ current_user.zip if current_user.is_authenticated else '' }}" required>
+                                        <div class="invalid-feedback">
+                                            Please enter your zip code.
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="deliveryInstructions" class="form-label">Delivery Instructions (Optional)</label>
+                                    <textarea class="form-control" id="deliveryInstructions" name="deliveryInstructions" rows="2" placeholder="E.g., Leave at front door, gate code, etc.">{{ current_user.delivery_instructions if current_user.is_authenticated else '' }}</textarea>
+                                </div>
+                            </div>
+                            
+                            <!-- Shipping Method -->
+                            <div class="mb-4">
+                                <h5 class="mb-3">Shipping Method</h5>
+                                <div class="shipping-options">
+                                    <div class="form-check shipping-option mb-3">
+                                        <input class="form-check-input" type="radio" name="shippingMethod" id="standardShipping" value="standard" checked>
+                                        <label class="form-check-label d-flex justify-content-between align-items-center w-100" for="standardShipping">
+                                            <div>
+                                                <span class="d-block fw-bold">Standard Shipping (3-5 business days)</span>
+                                                <small class="text-muted">Delivery by {{ (now + timedelta(days=5)).strftime('%b %d') }}</small>
+                                            </div>
+                                            <span class="shipping-price">$0.00</span>
+                                        </label>
+                                    </div>
+                                    
+                                    <div class="form-check shipping-option mb-3">
+                                        <input class="form-check-input" type="radio" name="shippingMethod" id="expressShipping" value="express">
+                                        <label class="form-check-label d-flex justify-content-between align-items-center w-100" for="expressShipping">
+                                            <div>
+                                                <span class="d-block fw-bold">Express Shipping (2-3 business days)</span>
+                                                <small class="text-muted">Delivery by {{ (now + timedelta(days=3)).strftime('%b %d') }}</small>
+                                            </div>
+                                            <span class="shipping-price">$9.99</span>
+                                        </label>
+                                    </div>
+                                    
+                                    <div class="form-check shipping-option">
+                                        <input class="form-check-input" type="radio" name="shippingMethod" id="overnightShipping" value="overnight">
+                                        <label class="form-check-label d-flex justify-content-between align-items-center w-100" for="overnightShipping">
+                                            <div>
+                                                <span class="d-block fw-bold">Overnight Shipping (1 business day)</span>
+                                                <small class="text-muted">Delivery by {{ (now + timedelta(days=1)).strftime('%b %d') }}</small>
+                                            </div>
+                                            <span class="shipping-price">$19.99</span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Payment Information -->
+                            <div class="mb-4">
+                                <h5 class="mb-3">Payment Information</h5>
+                                <div class="mb-3">
+                                    <label class="form-label d-block">Payment Method</label>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="paymentMethod" id="creditCard" value="creditCard" checked>
+                                        <label class="form-check-label" for="creditCard">Credit Card</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="paymentMethod" id="paypal" value="paypal">
+                                        <label class="form-check-label" for="paypal">PayPal</label>
+                                    </div>
+                                </div>
+                                
+                                <div id="creditCardFields">
+                                    <div class="mb-3">
+                                        <label for="cardName" class="form-label">Name on Card</label>
+                                        <input type="text" class="form-control" id="cardName" name="cardName" required>
+                                        <div class="invalid-feedback">
+                                            Please enter the name on your card.
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="mb-3">
+                                        <label for="cardNumber" class="form-label">Card Number</label>
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" id="cardNumber" name="cardNumber" placeholder="XXXX XXXX XXXX XXXX" required>
+                                            <span class="input-group-text">
+                                                <i class="fab fa-cc-visa me-1"></i>
+                                                <i class="fab fa-cc-mastercard me-1"></i>
+                                                <i class="fab fa-cc-amex"></i>
+                                            </span>
+                                        </div>
+                                        <div class="invalid-feedback">
+                                            Please enter your card number.
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="row">
+                                        <div class="col-md-6 mb-3">
+                                            <label for="expiryDate" class="form-label">Expiry Date</label>
+                                            <input type="text" class="form-control" id="expiryDate" name="expiryDate" placeholder="MM/YY" required>
+                                            <div class="invalid-feedback">
+                                                Please enter the expiry date.
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="col-md-6 mb-3">
+                                            <label for="cvv" class="form-label">CVV</label>
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" id="cvv" name="cvv" required>
+                                                <span class="input-group-text" data-bs-toggle="tooltip" data-bs-placement="top" title="3 or 4 digit security code on the back of your card">
+                                                    <i class="fas fa-question-circle"></i>
+                                                </span>
+                                            </div>
+                                            <div class="invalid-feedback">
+                                                Please enter the CVV.
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div id="paypalFields" style="display: none;">
+                                    <p class="mb-3">You will be redirected to PayPal to complete your payment after reviewing your order.</p>
+                                </div>
+                            </div>
+                            
+                            <!-- Billing Address -->
+                            <div class="mb-4">
+                                <h5 class="mb-3">Billing Address</h5>
+                                <div class="form-check mb-3">
+                                    <input class="form-check-input" type="checkbox" id="sameAsShipping" name="sameAsShipping" checked>
+                                    <label class="form-check-label" for="sameAsShipping">
+                                        Same as shipping address
+                                    </label>
+                                </div>
+                                
+                                <div id="billingAddressFields" style="display: none;">
+                                    <div class="mb-3">
+                                        <label for="billingAddress" class="form-label">Street Address</label>
+                                        <input type="text" class="form-control" id="billingAddress" name="billingAddress">
+                                    </div>
+                                    
+                                    <div class="mb-3">
+                                        <label for="billingAddressLine2" class="form-label">Apartment, Suite, etc. (Optional)</label>
+                                        <input type="text" class="form-control" id="billingAddressLine2" name="billingAddressLine2">
+                                    </div>
+                                    
+                                    <div class="row">
+                                        <div class="col-md-5 mb-3">
+                                            <label for="billingCity" class="form-label">City</label>
+                                            <input type="text" class="form-control" id="billingCity" name="billingCity">
+                                        </div>
+                                        
+                                        <div class="col-md-4 mb-3">
+                                            <label for="billingState" class="form-label">State</label>
+                                            <select class="form-select" id="billingState" name="billingState">
+                                                <option value="">Choose...</option>
+                                                <option value="AL">Alabama</option>
+                                                <option value="AK">Alaska</option>
+                                                <!-- Add all states here -->
+                                                <option value="WY">Wyoming</option>
+                                            </select>
+                                        </div>
+                                        
+                                        <div class="col-md-3 mb-3">
+                                            <label for="billingZip" class="form-label">Zip Code</label>
+                                            <input type="text" class="form-control" id="billingZip" name="billingZip">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Additional Information -->
+                            <div class="mb-4">
+                                <h5 class="mb-3">Additional Information</h5>
+                                <div class="mb-3">
+                                    <label for="orderNotes" class="form-label">Order Notes (Optional)</label>
+                                    <textarea class="form-control" id="orderNotes" name="orderNotes" rows="3" placeholder="Notes about your order, e.g. special notes for delivery"></textarea>
+                                </div>
+                            </div>
+                            
+                            <div class="form-check mb-4">
+                                <input class="form-check-input" type="checkbox" id="termsAgree" name="termsAgree" required>
+                                <label class="form-check-label" for="termsAgree">
+                                    I agree to the <a href="{{ url_for('main.terms') }}" target="_blank">Terms of Service</a> and <a href="{{ url_for('main.privacy') }}" target="_blank">Privacy Policy</a>
+                                </label>
+                                <div class="invalid-feedback">
+                                    You must agree to the terms and conditions.
+                                </div>
+                            </div>
+                            
+                            <div class="d-grid">
+                                <button type="submit" class="btn btn-custom btn-lg">Place Order</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Order Summary Column -->
+            <div class="col-lg-4" data-aos="fade-up" data-aos-delay="100">
+                <div class="card border-0 shadow-sm sticky-top" style="top: 100px;">
+                    <div class="card-header bg-white py-3">
+                        <h4 class="mb-0">Order Summary</h4>
+                    </div>
+                    <div class="card-body p-4">
+                        <div class="order-items mb-4">
+                            <h6 class="mb-3">Items ({{ cart_items|length }})</h6>
+                            
+                            {% for item in cart_items %}
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <div class="d-flex align-items-center">
+                                    <div class="order-item-image me-3">
+                                        <img src="{{ url_for('static', filename='images/products/' + item.product.image) }}" 
+                                             class="img-fluid rounded" 
+                                             alt="{{ item.product.name }}"
+                                             width="50">
+                                    </div>
+                                    <div>
+                                        <p class="mb-0 fw-bold">{{ item.product.name }}</p>
+                                        <small class="text-muted">{{ item.size }} x {{ item.quantity }}</small>
+                                    </div>
+                                </div>
+                                <span>${{ "%.2f"|format(item.total) }}</span>
+                            </div>
+                            {% endfor %}
+                        </div>
+                        
+                        <hr>
+                        
+                        <div class="d-flex justify-content-between mb-2">
+                            <span>Subtotal</span>
+                            <span class="fw-bold">${{ "%.2f"|format(subtotal) }}</span>
+                        </div>
+                        
+                        <div class="d-flex justify-content-between mb-2">
+                            <span>Shipping</span>
+                            <span class="fw-bold shipping-cost">${{ "%.2f"|format(shipping) }}</span>
+                        </div>
+                        
+                        <div class="d-flex justify-content-between mb-2">
+                            <span>Tax</span>
+                            <span class="fw-bold">${{ "%.2f"|format(tax) }}</span>
+                        </div>
+                        
+                        {% if discount %}
+                        <div class="d-flex justify-content-between mb-2 text-success">
+                            <span>Discount</span>
+                            <span class="fw-bold">-${{ "%.2f"|format(discount) }}</span>
+                        </div>
+                        {% endif %}
+                        
+                        <hr>
+                        
+                        <div class="d-flex justify-content-between mb-4">
+                            <strong>Total</strong>
+                            <strong class="text-primary h4 order-total">${{ "%.2f"|format(total) }}</strong>
+                        </div>
+                        
+                        <!-- Promo Code Section -->
+                        <div class="promo-code mb-4">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <label for="promoCode" class="form-label mb-0">Promo Code</label>
+                                <button class="btn btn-link p-0 text-decoration-none" type="button" data-bs-toggle="collapse" data-bs-target="#promoCodeCollapse">
+                                    <i class="fas fa-plus-circle"></i> Add
+                                </button>
+                            </div>
+                            <div class="collapse" id="promoCodeCollapse">
+                                <div class="input-group mt-2">
+                                    <input type="text" class="form-control" id="promoCode" placeholder="Enter code">
+                                    <button class="btn btn-outline-secondary" type="button">Apply</button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="secure-checkout text-center mb-4">
+                            <div class="d-flex align-items-center justify-content-center mb-2">
+                                <i class="fas fa-lock text-success me-2"></i>
+                                <span class="fw-bold">Secure Checkout</span>
+                            </div>
+                            <small class="text-muted">Your payment information is encrypted and secure.</small>
+                        </div>
+                        
+                        <div class="payment-methods text-center">
+                            <p class="text-muted mb-2">We Accept</p>
+                            <div class="d-flex justify-content-center gap-2">
+                                <i class="fab fa-cc-visa fa-2x text-muted"></i>
+                                <i class="fab fa-cc-mastercard fa-2x text-muted"></i>
+                                <i class="fab fa-cc-amex fa-2x text-muted"></i>
+                                <i class="fab fa-cc-paypal fa-2x text-muted"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block styles %}
+<style>
+    /* Shipping Options */
+    .shipping-option {
+        padding: 15px;
+        border: 1px solid #dee2e6;
+        border-radius: 10px;
+        transition: all 0.3s ease;
+    }
+    
+    .shipping-option:hover {
+        background-color: #f8f9fa;
+    }
+    
+    .shipping-option .form-check-input:checked ~ .form-check-label {
+        color: var(--primary-color);
+    }
+    
+    .shipping-option .form-check-input:checked ~ .form-check-label .shipping-price {
+        color: var(--primary-color);
+        font-weight: bold;
+    }
+    
+    .shipping-price {
+        font-weight: 600;
+    }
+    
+    /* Order Summary */
+    .order-items {
+        max-height: 300px;
+        overflow-y: auto;
+    }
+    
+    .order-item-image img {
+        object-fit: cover;
+        border-radius: 5px;
+    }
+    
+    /* Secure Checkout Badge */
+    .secure-checkout {
+        background-color: #f8f9fa;
+        padding: 10px;
+        border-radius: 10px;
+    }
+    
+    /* Payment Methods */
+    .payment-methods .fab {
+        transition: all 0.3s ease;
+    }
+    
+    .payment-methods .fab:hover {
+        color: var(--primary-color) !important;
+        transform: translateY(-3px);
+    }
+</style>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Form validation
+        const form = document.querySelector('.needs-validation');
+        form.addEventListener('submit', function(event) {
+            if (!form.checkValidity()) {
+                event.preventDefault();
+                event.stopPropagation();
+            }
+            
+            form.classList.add('was-validated');
+        }, false);
+        
+        // Payment method toggle
+        const paymentMethods = document.querySelectorAll('input[name="paymentMethod"]');
+        const creditCardFields = document.getElementById('creditCardFields');
+        const paypalFields = document.getElementById('paypalFields');
+        
+        paymentMethods.forEach(method => {
+            method.addEventListener('change', function() {
+                if (this.id === 'creditCard') {
+                    creditCardFields.style.display = 'block';
+                    paypalFields.style.display = 'none';
+                } else if (this.id === 'paypal') {
+                    creditCardFields.style.display = 'none';
+                    paypalFields.style.display = 'block';
+                }
+            });
+        });
+        
+        // Billing address toggle
+        const sameAsShippingCheckbox = document.getElementById('sameAsShipping');
+        const billingAddressFields = document.getElementById('billingAddressFields');
+        
+        sameAsShippingCheckbox.addEventListener('change', function() {
+            if (this.checked) {
+                billingAddressFields.style.display = 'none';
+            } else {
+                billingAddressFields.style.display = 'block';
+            }
+        });
+        
+        // Shipping method price update
+        const shippingMethods = document.querySelectorAll('input[name="shippingMethod"]');
+        const shippingCostElement = document.querySelector('.shipping-cost');
+        const orderTotalElement = document.querySelector('.order-total');
+        const subtotal = {{ subtotal }};
+        const tax = {{ tax }};
+        {% if discount %}
+        const discount = {{ discount }};
+        {% else %}
+        const discount = 0;
+        {% endif %}
+        
+        shippingMethods.forEach(method => {
+            method.addEventListener('change', function() {
+                let shippingCost = 0;
+                
+                if (this.id === 'expressShipping') {
+                    shippingCost = 9.99;
+                } else if (this.id === 'overnightShipping') {
+                    shippingCost = 19.99;
+                }
+                
+                // Update shipping cost display
+                shippingCostElement.textContent = '$' + shippingCost.toFixed(2);
+                
+                // Update total
+                const total = subtotal + shippingCost + tax - discount;
+                orderTotalElement.textContent = '$' + total.toFixed(2);
+            });
+        });
+        
+        // Initialize tooltips
+        const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+        tooltipTriggerList.map(function (tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl);
+        });
+        
+        // Format credit card number with spaces
+        const cardNumberInput = document.getElementById('cardNumber');
+        if (cardNumberInput) {
+            cardNumberInput.addEventListener('input', function(e) {
+                let value = e.target.value.replace(/\s+/g, '').replace(/[^0-9]/gi, '');
+                let formattedValue = '';
+                
+                for (let i = 0; i < value.length; i++) {
+                    if (i > 0 && i % 4 === 0) {
+                        formattedValue += ' ';
+                    }
+                    formattedValue += value[i];
+                }
+                
+                e.target.value = formattedValue;
+            });
+        }
+        
+        // Format expiry date
+        const expiryDateInput = document.getElementById('expiryDate');
+        if (expiryDateInput) {
+            expiryDateInput.addEventListener('input', function(e) {
+                let value = e.target.value.replace(/\D/g, '');
+                
+                if (value.length > 2) {
+                    value = value.substring(0, 2) + '/' + value.substring(2, 4);
+                }
+                
+                e.target.value = value;
+            });
+        }
+    });
+</script>
+{% endblock %}

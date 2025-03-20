@@ -1,0 +1,283 @@
+<!-- templates/index.html -->
+{% extends "layout.html" %} {% block content %}
+<section class="hero" data-aos="fade-in">
+  <div class="water-drops"></div>
+  <div class="hero-content">
+    <h1 class="hero-title">Pure Water, Pure Life</h1>
+    <p class="hero-subtitle">
+      Experience nature's finest, delivered to your doorstep
+    </p>
+    <div class="hero-cta">
+      <a href="{{ url_for('main.products') }}" class="btn btn-custom"
+        >Shop Now</a
+      >
+      <a href="#about" class="btn btn-custom-outline">Learn More</a>
+    </div>
+  </div>
+</section>
+
+<!-- Why Choose Us Section -->
+<section id="about" class="py-5">
+  <div class="container">
+    <div class="row text-center mb-5">
+      <div class="col-12">
+        <h2 class="section-title" data-aos="fade-up">Why Choose PureFlow?</h2>
+        <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">
+          We deliver more than just water - we deliver health and happiness
+        </p>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="200">
+        <div class="feature-card text-center p-4">
+          <div class="icon-box mb-4">
+            <i class="fas fa-tint fa-3x text-primary"></i>
+          </div>
+          <h3>Pure & Natural</h3>
+          <p>
+            Our water comes from pristine natural springs, filtered through
+            layers of rock for natural purification.
+          </p>
+        </div>
+      </div>
+
+      <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="300">
+        <div class="feature-card text-center p-4">
+          <div class="icon-box mb-4">
+            <i class="fas fa-truck fa-3x text-primary"></i>
+          </div>
+          <h3>Convenient Delivery</h3>
+          <p>
+            Regular deliveries right to your doorstep, so you never run out of
+            fresh, clean water.
+          </p>
+        </div>
+      </div>
+
+      <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="400">
+        <div class="feature-card text-center p-4">
+          <div class="icon-box mb-4">
+            <i class="fas fa-leaf fa-3x text-primary"></i>
+          </div>
+          <h3>Eco-Friendly</h3>
+          <p>
+            Our bottles are made from recycled materials and are 100% recyclable
+            to minimize environmental impact.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Featured Products Section -->
+<section class="bg-light py-5">
+  <div class="container">
+    <div class="row text-center mb-5">
+      <div class="col-12">
+        <h2 class="section-title" data-aos="fade-up">Featured Products</h2>
+        <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">
+          Discover our most popular water options
+        </p>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="200">
+        <div class="card h-100">
+          <img
+            src="{{ url_for('static', filename='images/spring-water.jpg') }}"
+            class="card-img-top"
+            alt="Spring Water"
+          />
+          <div class="card-body">
+            <h5 class="card-title">Spring Water</h5>
+            <p class="card-text">
+              Pure natural spring water sourced from protected underground
+              springs.
+            </p>
+            <div class="d-flex justify-content-between align-items-center">
+              <span class="price">$24.99</span>
+              <a
+                href="{{ url_for('main.products') }}"
+                class="btn btn-sm btn-custom"
+                >View Details</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="300">
+        <div class="card h-100">
+          <img
+            src="{{ url_for('static', filename='images/glass.jpg') }}"
+            class="card-img-top"
+            alt="Mineral Water"
+          />
+          <div class="card-body">
+            <h5 class="card-title">Mineral Water</h5>
+            <p class="card-text">
+              Enriched with essential minerals for improved health and
+              hydration.
+            </p>
+            <div class="d-flex justify-content-between align-items-center">
+              <span class="price">$29.99</span>
+              <a
+                href="{{ url_for('main.products') }}"
+                class="btn btn-sm btn-custom"
+                >View Details</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="400">
+        <div class="card h-100">
+          <img
+            src="{{ url_for('static', filename='images/bulk.webp') }}"
+            class="card-img-top"
+            alt="Alkaline Water"
+          />
+          <div class="card-body">
+            <h5 class="card-title">Alkaline Water</h5>
+            <p class="card-text">
+              Higher pH water that helps balance your body's acidity levels.
+            </p>
+            <div class="d-flex justify-content-between align-items-center">
+              <span class="price">$34.99</span>
+              <a
+                href="{{ url_for('main.products') }}"
+                class="btn btn-sm btn-custom"
+                >View Details</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="text-center mt-4" data-aos="fade-up" data-aos-delay="500">
+      <a href="{{ url_for('main.products') }}" class="btn btn-custom"
+        >View All Products</a
+      >
+    </div>
+  </div>
+</section>
+
+<!-- Testimonials Section -->
+<section class="py-5">
+  <div class="container">
+    <div class="row text-center mb-5">
+      <div class="col-12">
+        <h2 class="section-title" data-aos="fade-up">What Our Customers Say</h2>
+        <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">
+          Hear from people who've experienced the PureFlow difference
+        </p>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="200">
+        <div class="testimonial-card p-4">
+          <div class="testimonial-content">
+            <p class="mb-4">
+              "I've been a PureFlow customer for over 2 years now. The water
+              quality is exceptional, and their delivery service is always on
+              time."
+            </p>
+            <div class="d-flex align-items-center">
+              <div class="testimonial-avatar me-3">
+                <img
+                  src="{{ url_for('static', filename='images/testimonial-1.jpg') }}"
+                  alt="Customer"
+                  class="rounded-circle"
+                  width="60"
+                />
+              </div>
+              <div>
+                <h5 class="mb-0">Sarah Johnson</h5>
+                <small class="text-muted">Regular Customer</small>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="300">
+        <div class="testimonial-card p-4">
+          <div class="testimonial-content">
+            <p class="mb-4">
+              "The subscription service is so convenient. I never have to worry
+              about running out of water, and the quality is consistently
+              excellent."
+            </p>
+            <div class="d-flex align-items-center">
+              <div class="testimonial-avatar me-3">
+                <img
+                  src="{{ url_for('static', filename='images/testimonial-2.jpg') }}"
+                  alt="Customer"
+                  class="rounded-circle"
+                  width="60"
+                />
+              </div>
+              <div>
+                <h5 class="mb-0">Michael Thompson</h5>
+                <small class="text-muted">Subscription Member</small>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="400">
+        <div class="testimonial-card p-4">
+          <div class="testimonial-content">
+            <p class="mb-4">
+              "As a fitness instructor, I recommend PureFlow to all my clients.
+              Their alkaline water has made a noticeable difference in my
+              recovery times."
+            </p>
+            <div class="d-flex align-items-center">
+              <div class="testimonial-avatar me-3">
+                <img
+                  src="{{ url_for('static', filename='images/testimonial-3.jpg') }}"
+                  alt="Customer"
+                  class="rounded-circle"
+                  width="60"
+                />
+              </div>
+              <div>
+                <h5 class="mb-0">Jennifer Davis</h5>
+                <small class="text-muted">Fitness Instructor</small>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Subscription CTA Section -->
+<section class="cta-section py-5 bg-primary text-white">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-lg-8 mb-4 mb-lg-0" data-aos="fade-right">
+        <h2 class="text-white">Never Run Out of Fresh Water Again</h2>
+        <p class="lead mb-0">
+          Subscribe to our delivery service and save up to 20% on regular
+          orders.
+        </p>
+      </div>
+      <div class="col-lg-4 text-lg-end" data-aos="fade-left">
+        <a href="{{ url_for('main.subscribe') }}" class="btn btn-light btn-lg"
+          >Subscribe Now</a
+        >
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,57 @@
+<!-- templates/partials/footer.html -->
+<footer class="footer mt-auto py-5">
+  <div class="container">
+      <div class="row">
+          <div class="col-md-4">
+              <h5>PureFlow</h5>
+              <p>Delivering pure, refreshing water since 1995. Committed to quality and sustainability.</p>
+              <div class="social-links">
+                  <a href="#"><i class="fab fa-facebook"></i></a>
+                  <a href="#"><i class="fab fa-twitter"></i></a>
+                  <a href="#"><i class="fab fa-instagram"></i></a>
+              </div>
+          </div>
+          <div class="col-md-2">
+              <h5>Quick Links</h5>
+              <ul class="list-unstyled">
+                  <li><a href="{{ url_for('main.products') }}">Products</a></li>
+                  <li><a href="{{ url_for('main.about') }}">About Us</a></li>
+                  <li><a href="#subscription">Subscribe</a></li>
+                  <li><a href="#contact">Contact</a></li>
+              </ul>
+          </div>
+          <div class="col-md-3">
+              <h5>Customer Service</h5>
+              <ul class="list-unstyled">
+                  <li><a href="#faq">FAQ</a></li>
+                  <li><a href="#shipping">Shipping Information</a></li>
+                  <li><a href="#returns">Returns Policy</a></li>
+                  <li><a href="#privacy">Privacy Policy</a></li>
+              </ul>
+          </div>
+          <div class="col-md-3">
+              <h5>Newsletter</h5>
+              <p>Stay updated with our latest offers and news.</p>
+              <form class="newsletter-form">
+                  <div class="input-group">
+                      <input type="email" class="form-control" placeholder="Your email">
+                      <button class="btn btn-custom" type="submit">
+                          <i class="fas fa-paper-plane"></i>
+                      </button>
+                  </div>
+              </form>
+          </div>
+      </div>
+      <hr>
+      <div class="row">
+          <div class="col-md-6">
+              <p class="mb-0">&copy; 2025 PureFlow Bottled Water. All rights reserved.</p>
+          </div>
+          <div class="col-md-6 text-md-end">
+              <img src="{{ url_for('static', filename='images/Screenshot from 2025-01-12 10-17-53.png') }}" 
+                   alt="Payment Methods" 
+                   class="payment-methods">
+          </div>
+      </div>
+  </div>
+</footer>

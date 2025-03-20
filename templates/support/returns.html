@@ -1,0 +1,158 @@
+{% extends "layout.html" %} {% block title %}Returns Policy - PureFlow{%
+endblock %} {% block content %}
+<section class="support-page">
+  <div class="container py-5">
+    <div class="row">
+      <div class="col-lg-8 mx-auto">
+        <h1 class="text-center mb-5" data-aos="fade-up">Returns Policy</h1>
+
+        <div class="card mb-4" data-aos="fade-up" data-aos-delay="100">
+          <div class="card-body">
+            <h3 class="card-title">Our Satisfaction Guarantee</h3>
+            <p>
+              At PureFlow, we stand behind the quality of our products. If
+              you're not completely satisfied with your purchase, we're here to
+              help.
+            </p>
+            <p>
+              We offer a 30-day satisfaction guarantee on all our products. If
+              you're not happy with your purchase for any reason, you can return
+              it within 30 days for a full refund or replacement.
+            </p>
+          </div>
+        </div>
+
+        <div class="card mb-4" data-aos="fade-up" data-aos-delay="150">
+          <div class="card-body">
+            <h3 class="card-title">Eligible Returns</h3>
+            <p>The following items are eligible for returns:</p>
+            <ul>
+              <li>Unopened water bottles and containers</li>
+              <li>Dispensers and accessories in original packaging</li>
+              <li>Damaged or defective products</li>
+            </ul>
+
+            <p>Please note:</p>
+            <ul>
+              <li>
+                Opened consumable products cannot be returned for safety and
+                quality reasons
+              </li>
+              <li>
+                Custom or personalized items may not be eligible for return
+              </li>
+              <li>Sale items may have limited return eligibility</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="card mb-4" data-aos="fade-up" data-aos-delay="200">
+          <div class="card-body">
+            <h3 class="card-title">Return Process</h3>
+            <ol>
+              <li>
+                <strong>Contact Us:</strong> Initiate your return by contacting
+                our customer service team through the
+                <a href="{{ url_for('main.contact') }}">Contact page</a> or by
+                calling (800) 555-WATER.
+              </li>
+              <li>
+                <strong>Return Authorization:</strong> You'll receive a Return
+                Authorization (RA) number and return instructions.
+              </li>
+              <li>
+                <strong>Package Your Return:</strong> Securely package the items
+                in their original packaging if possible.
+              </li>
+              <li>
+                <strong>Ship or Schedule Pickup:</strong> Either ship the items
+                back using the provided return label or schedule a pickup with
+                our delivery team.
+              </li>
+              <li>
+                <strong>Refund Processing:</strong> Once we receive and inspect
+                your return, we'll process your refund or replacement.
+              </li>
+            </ol>
+          </div>
+        </div>
+
+        <div class="card mb-4" data-aos="fade-up" data-aos-delay="250">
+          <div class="card-body">
+            <h3 class="card-title">Refunds</h3>
+            <p>
+              Refunds will be processed to the original payment method used for
+              the purchase:
+            </p>
+            <ul>
+              <li>
+                Credit/debit card refunds typically take 5-7 business days to
+                appear on your statement
+              </li>
+              <li>Other payment methods may take longer to process</li>
+            </ul>
+            <p>
+              Shipping fees are non-refundable unless the return is due to our
+              error or a defective product.
+            </p>
+          </div>
+        </div>
+
+        <div class="card mb-4" data-aos="fade-up" data-aos-delay="300">
+          <div class="card-body">
+            <h3 class="card-title">Damaged or Defective Products</h3>
+            <p>If you receive a damaged or defective product:</p>
+            <ol>
+              <li>Contact us within 48 hours of delivery</li>
+              <li>Provide photos of the damaged items if possible</li>
+              <li>
+                We'll arrange for a replacement or refund at no additional cost
+              </li>
+            </ol>
+            <p>
+              For subscription customers, we'll ensure your next delivery
+              includes any replacement items needed.
+            </p>
+          </div>
+        </div>
+
+        <div class="card mb-4" data-aos="fade-up" data-aos-delay="350">
+          <div class="card-body">
+            <h3 class="card-title">Subscription Cancellations</h3>
+            <p>
+              You can cancel your subscription at any time through your account
+              dashboard:
+            </p>
+            <ul>
+              <li>No cancellation fees or penalties</li>
+              <li>
+                Prorated refunds for unused portion of prepaid subscriptions
+              </li>
+              <li>Option to pause subscriptions instead of cancelling</li>
+            </ul>
+            <p>
+              For assistance with subscription changes, please contact our
+              customer service team.
+            </p>
+          </div>
+        </div>
+
+        <div class="text-center mt-5" data-aos="fade-up" data-aos-delay="400">
+          <p>Have questions about returns or need assistance?</p>
+          <a href="{{ url_for('main.contact') }}" class="btn btn-custom"
+            >Contact Us</a
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %} {% block scripts %}
+<script>
+  // Initialize AOS
+  AOS.init({
+    duration: 800,
+    easing: "ease-in-out",
+  });
+</script>
+{% endblock %}

@@ -1,0 +1,132 @@
+<!-- templates/orders.html -->
+{% extends "layout.html" %} {% block title %}Your Orders - PureFlow{% endblock
+%} {% block content %}
+<section class="hero-small" data-aos="fade-in">
+  <div class="hero-content">
+    <h1 class="hero-title">Your Orders</h1>
+    <p class="hero-subtitle">Track and manage your purchases</p>
+  </div>
+</section>
+
+<section class="container py-5">
+  <div class="row">
+    <div class="col-12" data-aos="fade-up">
+      <div class="card border-0 shadow-sm mb-4">
+        <div class="card-header bg-white py-3">
+          <h4 class="mb-0">Order History</h4>
+        </div>
+        <div class="card-body p-0">
+          {% if orders %}
+          <div class="table-responsive">
+            <table class="table table-hover mb-0">
+              <thead class="table-light">
+                <tr>
+                  <th>Order #</th>
+                  <th>Date</th>
+                  <th>Items</th>
+                  <th>Total</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for order in orders %}
+                <tr>
+                  <td>{{ order.id }}</td>
+                  <td>{{ order.date_created.strftime('%B %d, %Y') }}</td>
+                  <td>{{ order.items|length }}</td>
+                  <td>${{ "%.2f"|format(order.total) }}</td>
+                  <td>
+                    <span class="badge bg-{{ order.status_color }}"
+                      >{{ order.status }}</span
+                    >
+                  </td>
+                  <td>
+                    <a
+                      href="{{ url_for('main.order_details', order_id=order.id) }}"
+                      class="btn btn-sm btn-outline-primary"
+                      >View Details</a
+                    >
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+          {% else %}
+          <div class="text-center py-5">
+            <img
+              src="{{ url_for('static', filename='images/empty-orders.svg') }}"
+              alt="No orders"
+              class="img-fluid mb-3"
+              style="max-width: 200px"
+            />
+            <h5>You haven't placed any orders yet</h5>
+            <p class="text-muted">
+              Browse our products and make your first purchase!
+            </p>
+            <a href="{{ url_for('main.products') }}" class="btn btn-custom mt-2"
+              >Shop Now</a
+            >
+          </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Order Details Modal -->
+<div
+  class="modal fade"
+  id="orderDetailsModal"
+  tabindex="-1"
+  aria-labelledby="orderDetailsModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="orderDetailsModalLabel">Order Details</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body" id="orderDetailsContent">
+        <!-- Content will be loaded dynamically -->
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %} {% block scripts %}
+<script>
+  // JavaScript to handle viewing order details in a modal
+  function viewOrderDetails(orderId) {
+    // Here you would typically make an AJAX call to get order details
+    // For now, we'll just show a placeholder message
+    const content = document.getElementById("orderDetailsContent");
+    content.innerHTML = `<div class="text-center py-3"><div class="spinner-border" role="status"></div><p class="mt-2">Loading order #${orderId}...</p></div>`;
+
+    // Show the modal
+    const modal = new bootstrap.Modal(
+      document.getElementById("orderDetailsModal")
+    );
+    modal.show();
+
+    // In a real implementation, you would fetch data from the server
+    // fetch(`/api/orders/${orderId}`)
+    //     .then(response => response.json())
+    //     .then(data => {
+    //         // Update modal content with order details
+    //     });
+  }
+</script>
+{% endblock %}

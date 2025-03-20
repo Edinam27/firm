@@ -1,0 +1,1077 @@
+<!-- templates/subscribe.html -->
+{% extends "layout.html" %} {% block title %}Subscribe - PureFlow{% endblock %}
+{% block content %}
+<section class="hero-small" data-aos="fade-in">
+  <div class="hero-content">
+    <h1 class="hero-title">Water Subscription Plans</h1>
+    <p class="hero-subtitle">Regular deliveries, exclusive savings</p>
+  </div>
+</section>
+
+<section class="py-5">
+  <div class="container">
+    <div class="row text-center mb-5">
+      <div class="col-12">
+        <h2 class="section-title" data-aos="fade-up">Choose Your Plan</h2>
+        <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">
+          Subscribe and save with our flexible delivery options
+        </p>
+      </div>
+    </div>
+
+    <div class="row mb-5">
+      <div class="col-md-4 mb-4" data-aos="fade-up">
+        <div class="card pricing-card h-100">
+          <div class="card-body text-center p-5">
+            <h5 class="pricing-title">Basic</h5>
+            <div class="pricing-price">
+              <span class="currency">$</span>
+              <span class="amount">29</span>
+              <span class="period">/month</span>
+            </div>
+            <p class="pricing-description">
+              Perfect for individuals or small households
+            </p>
+            <hr />
+            <ul class="pricing-features list-unstyled">
+              <li>
+                <i class="fas fa-check text-success me-2"></i> 4 bottles per
+                month
+              </li>
+              <li>
+                <i class="fas fa-check text-success me-2"></i> Choice of water
+                type
+              </li>
+              <li>
+                <i class="fas fa-check text-success me-2"></i> Monthly delivery
+              </li>
+              <li>
+                <i class="fas fa-check text-success me-2"></i> Free shipping
+              </li>
+              <li>
+                <i class="fas fa-times text-danger me-2"></i> No dispenser
+                included
+              </li>
+              <li>
+                <i class="fas fa-times text-danger me-2"></i> No priority
+                support
+              </li>
+            </ul>
+            <a
+              href="#subscription-form"
+              class="btn btn-outline-primary btn-lg w-100 mt-4"
+              >Select Plan</a
+            >
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="100">
+        <div class="card pricing-card h-100 popular">
+          <div class="popular-badge">Most Popular</div>
+          <div class="card-body text-center p-5">
+            <h5 class="pricing-title">Family</h5>
+            <div class="pricing-price">
+              <span class="currency">$</span>
+              <span class="amount">49</span>
+              <span class="period">/month</span>
+            </div>
+            <p class="pricing-description">
+              Ideal for families and medium households
+            </p>
+            <hr />
+            <ul class="pricing-features list-unstyled">
+              <li>
+                <i class="fas fa-check text-success me-2"></i> 8 bottles per
+                month
+              </li>
+              <li>
+                <i class="fas fa-check text-success me-2"></i> Choice of water
+                type
+              </li>
+              <li>
+                <i class="fas fa-check text-success me-2"></i> Bi-weekly
+                delivery
+              </li>
+              <li>
+                <i class="fas fa-check text-success me-2"></i> Free shipping
+              </li>
+              <li>
+                <i class="fas fa-check text-success me-2"></i> Dispenser rental
+                included
+              </li>
+              <li>
+                <i class="fas fa-times text-danger me-2"></i> No priority
+                support
+              </li>
+            </ul>
+            <a
+              href="#subscription-form"
+              class="btn btn-custom btn-lg w-100 mt-4"
+              >Select Plan</a
+            >
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="200">
+        <div class="card pricing-card h-100">
+          <div class="card-body text-center p-5">
+            <h5 class="pricing-title">Premium</h5>
+            <div class="pricing-price">
+              <span class="currency">$</span>
+              <span class="amount">79</span>
+              <span class="period">/month</span>
+            </div>
+            <p class="pricing-description">For large households or offices</p>
+            <hr />
+            <ul class="pricing-features list-unstyled">
+              <li>
+                <i class="fas fa-check text-success me-2"></i> 12 bottles per
+                month
+              </li>
+              <li>
+                <i class="fas fa-check text-success me-2"></i> Mix and match
+                water types
+              </li>
+              <li>
+                <i class="fas fa-check text-success me-2"></i> Weekly delivery
+              </li>
+              <li>
+                <i class="fas fa-check text-success me-2"></i> Free shipping
+              </li>
+              <li>
+                <i class="fas fa-check text-success me-2"></i> Premium dispenser
+                included
+              </li>
+              <li>
+                <i class="fas fa-check text-success me-2"></i> Priority support
+              </li>
+            </ul>
+            <a
+              href="#subscription-form"
+              class="btn btn-outline-primary btn-lg w-100 mt-4"
+              >Select Plan</a
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row mb-5">
+      <div class="col-12 text-center" data-aos="fade-up">
+        <h3 class="mb-4">All Subscriptions Include</h3>
+        <div class="row justify-content-center">
+          <div class="col-md-3 col-6 mb-4">
+            <div class="feature-box text-center">
+              <div class="feature-icon mb-3">
+                <i class="fas fa-calendar-check fa-3x text-primary"></i>
+              </div>
+              <h5>Flexible Scheduling</h5>
+              <p class="text-muted">Adjust delivery dates anytime</p>
+            </div>
+          </div>
+          <div class="col-md-3 col-6 mb-4">
+            <div class="feature-box text-center">
+              <div class="feature-icon mb-3">
+                <i class="fas fa-exchange-alt fa-3x text-primary"></i>
+              </div>
+              <h5>Easy Exchanges</h5>
+              <p class="text-muted">Switch water types as needed</p>
+            </div>
+          </div>
+          <div class="col-md-3 col-6 mb-4">
+            <div class="feature-box text-center">
+              <div class="feature-icon mb-3">
+                <i class="fas fa-credit-card fa-3x text-primary"></i>
+              </div>
+              <h5>Hassle-free Billing</h5>
+              <p class="text-muted">Automatic monthly payments</p>
+            </div>
+          </div>
+          <div class="col-md-3 col-6 mb-4">
+            <div class="feature-box text-center">
+              <div class="feature-icon mb-3">
+                <i class="fas fa-hand-holding-usd fa-3x text-primary"></i>
+              </div>
+              <h5>10% Discount</h5>
+              <p class="text-muted">On all additional purchases</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row" id="subscription-form">
+      <div class="col-lg-8 mx-auto" data-aos="fade-up">
+        <div class="card border-0 shadow">
+          <div class="card-body p-5">
+            <h3 class="card-title text-center mb-4">Start Your Subscription</h3>
+
+            <form class="needs-validation" novalidate>
+              <div class="mb-4">
+                <h5>1. Select Your Plan</h5>
+                <div class="row mt-3">
+                  <div class="col-md-4 mb-3">
+                    <div class="form-check custom-radio">
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        name="plan"
+                        id="basicPlan"
+                        value="basic"
+                      />
+                      <label class="form-check-label w-100" for="basicPlan">
+                        <div class="d-flex justify-content-between">
+                          <span>Basic</span>
+                          <span>$29/month</span>
+                        </div>
+                      </label>
+                    </div>
+                  </div>
+                  <div class="col-md-4 mb-3">
+                    <div class="form-check custom-radio">
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        name="plan"
+                        id="familyPlan"
+                        value="family"
+                        checked
+                      />
+                      <label class="form-check-label w-100" for="familyPlan">
+                        <div class="d-flex justify-content-between">
+                          <span>Family</span>
+                          <span>$49/month</span>
+                        </div>
+                      </label>
+                    </div>
+                  </div>
+                  <div class="col-md-4 mb-3">
+                    <div class="form-check custom-radio">
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        name="plan"
+                        id="premiumPlan"
+                        value="premium"
+                      />
+                      <label class="form-check-label w-100" for="premiumPlan">
+                        <div class="d-flex justify-content-between">
+                          <span>Premium</span>
+                          <span>$79/month</span>
+                        </div>
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="mb-4">
+                <h5>2. Choose Your Water</h5>
+                <div class="row mt-3">
+                  <div class="col-md-6 mb-3">
+                    <select class="form-select" id="waterType">
+                      <option selected disabled>Select water type</option>
+                      <option>Natural Spring Water</option>
+                      <option>Premium Mineral Water</option>
+                      <option>Alkaline Water</option>
+                      <option>Sparkling Water</option>
+                      <option>Mix (Premium plan only)</option>
+                    </select>
+                  </div>
+                  <div class="col-md-6 mb-3">
+                    <select class="form-select" id="bottleSize">
+                      <option selected disabled>Select bottle size</option>
+                      <option>5 Liter</option>
+                      <option>10 Liter</option>
+                      <option>20 Liter</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+              <div class="mb-4">
+                <h5>3. Delivery Schedule</h5>
+                <div class="row mt-3">
+                  <div class="col-md-6 mb-3">
+                    <select class="form-select" id="deliveryFrequency">
+                      <option selected disabled>Select frequency</option>
+                      <option>Weekly</option>
+                      <option>Bi-weekly</option>
+                      <option>Monthly</option>
+                    </select>
+                  </div>
+                  <div class="col-md-6 mb-3">
+                    <select class="form-select" id="preferredDay">
+                      <option selected disabled>Preferred delivery day</option>
+                      <option>Monday</option>
+                      <option>Tuesday</option>
+                      <option>Wednesday</option>
+                      <option>Thursday</option>
+                      <option>Friday</option>
+                      <option>Saturday</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+              <div class="mb-4">
+                <h5>4. Delivery Address</h5>
+                <div class="row mt-3">
+                  <div class="col-md-6 mb-3">
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="firstName"
+                      placeholder="First name"
+                      required
+                    />
+                  </div>
+                  <div class="col-md-6 mb-3">
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="lastName"
+                      placeholder="Last name"
+                      required
+                    />
+                  </div>
+                  <div class="col-12 mb-3">
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="address"
+                      placeholder="Street address"
+                      required
+                    />
+                  </div>
+                  <div class="col-md-4 mb-3">
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="city"
+                      placeholder="City"
+                      required
+                    />
+                  </div>
+                  <div class="col-md-4 mb-3">
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="state"
+                      placeholder="State"
+                      required
+                    />
+                  </div>
+                  <div class="col-md-4 mb-3">
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="zipCode"
+                      placeholder="Zip code"
+                      required
+                    />
+                  </div>
+                  <div class="col-12 mb-3">
+                    <input
+                      type="tel"
+                      class="form-control"
+                      id="phone"
+                      placeholder="Phone number"
+                      required
+                    />
+                  </div>
+                  <div class="col-12 mb-3">
+                    <textarea
+                      class="form-control"
+                      id="deliveryNotes"
+                      rows="3"
+                      placeholder="Delivery notes (optional)"
+                    ></textarea>
+                  </div>
+                </div>
+              </div>
+
+              <div class="mb-4">
+                <h5>5. Payment Information</h5>
+                <div class="row mt-3">
+                  <div class="col-12 mb-3">
+                    <div class="form-check">
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        name="paymentMethod"
+                        id="creditCard"
+                        checked
+                      />
+                      <label class="form-check-label" for="creditCard">
+                        Credit Card
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        name="paymentMethod"
+                        id="paypal"
+                      />
+                      <label class="form-check-label" for="paypal">
+                        PayPal
+                      </label>
+                    </div>
+                  </div>
+
+                  <div id="creditCardFields">
+                    <div class="col-12 mb-3">
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="cardName"
+                        placeholder="Name on card"
+                        required
+                      />
+                    </div>
+                    <div class="col-12 mb-3">
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="cardNumber"
+                        placeholder="Card number"
+                        required
+                      />
+                    </div>
+                    <div class="row">
+                      <div class="col-md-6 mb-3">
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="expiration"
+                          placeholder="MM/YY"
+                          required
+                        />
+                      </div>
+                      <div class="col-md-6 mb-3">
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="cvv"
+                          placeholder="CVV"
+                          required
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-check mb-4">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  id="termsCheck"
+                  required
+                />
+                <label class="form-check-label" for="termsCheck">
+                  I agree to the
+                  <a href="{{ url_for('main.terms') }}" target="_blank"
+                    >Terms of Service</a
+                  >
+                  and
+                  <a href="{{ url_for('main.privacy') }}" target="_blank"
+                    >Privacy Policy</a
+                  >
+                </label>
+              </div>
+
+              <div class="d-grid">
+                <button type="submit" class="btn btn-custom btn-lg">
+                  Start Subscription
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ Section -->
+<section class="py-5 bg-light">
+  <div class="container">
+    <div class="row text-center mb-5">
+      <div class="col-12">
+        <h2 class="section-title" data-aos="fade-up">
+          Frequently Asked Questions
+        </h2>
+        <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">
+          Everything you need to know about our subscription service
+        </p>
+      </div>
+    </div>
+
+    <div class="row justify-content-center">
+      <div class="col-lg-8" data-aos="fade-up">
+        <div class="accordion" id="faqAccordion">
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="headingOne">
+              <button
+                class="accordion-button"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#collapseOne"
+                aria-expanded="true"
+                aria-controls="collapseOne"
+              >
+                How does the subscription work?
+              </button>
+            </h2>
+            <div
+              id="collapseOne"
+              class="accordion-collapse collapse show"
+              aria-labelledby="headingOne"
+              data-bs-parent="#faqAccordion"
+            >
+              <div class="accordion-body">
+                Our subscription service delivers premium water to your doorstep
+                on a regular schedule. Choose your preferred water type, bottle
+                size, and delivery frequency. We'll handle the rest, ensuring
+                you never run out of fresh, clean water.
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="headingTwo">
+              <button
+                class="accordion-button collapsed"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#collapseTwo"
+                aria-expanded="false"
+                aria-controls="collapseTwo"
+              >
+                Can I change my delivery schedule?
+              </button>
+            </h2>
+            <div
+              id="collapseTwo"
+              class="accordion-collapse collapse"
+              aria-labelledby="headingTwo"
+              data-bs-parent="#faqAccordion"
+            >
+              <div class="accordion-body">
+                Yes, you can easily adjust your delivery schedule through your
+                account dashboard. Changes made at least 48 hours before your
+                next scheduled delivery will be applied to that delivery.
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="headingThree">
+              <button
+                class="accordion-button collapsed"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#collapseThree"
+                aria-expanded="false"
+                aria-controls="collapseThree"
+              >
+                How do I return empty bottles?
+              </button>
+            </h2>
+            <div
+              id="collapseThree"
+              class="accordion-collapse collapse"
+              aria-labelledby="headingThree"
+              data-bs-parent="#faqAccordion"
+            >
+              <div class="accordion-body">
+                Our delivery personnel will collect your empty bottles during
+                your next delivery. Simply leave them at your designated
+                delivery spot. This helps us maintain our eco-friendly recycling
+                program.
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="headingFour">
+              <button
+                class="accordion-button collapsed"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#collapseFour"
+                aria-expanded="false"
+                aria-controls="collapseFour"
+              >
+                Can I cancel my subscription anytime?
+              </button>
+            </h2>
+            <div
+              id="collapseFour"
+              class="accordion-collapse collapse"
+              aria-labelledby="headingFour"
+              data-bs-parent="#faqAccordion"
+            >
+              <div class="accordion-body">
+                Yes, you can cancel your subscription at any time without any
+                cancellation fees. Simply log into your account and navigate to
+                the subscription management section, or contact our customer
+                service team.
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="headingFive">
+              <button
+                class="accordion-button collapsed"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#collapseFive"
+                aria-expanded="false"
+                aria-controls="collapseFive"
+              >
+                What if I'm not home during delivery?
+              </button>
+            </h2>
+            <div
+              id="collapseFive"
+              class="accordion-collapse collapse"
+              aria-labelledby="headingFive"
+              data-bs-parent="#faqAccordion"
+            >
+              <div class="accordion-body">
+                No problem! You can specify a safe location for us to leave your
+                delivery in the delivery notes. Our bottles are sealed and
+                durable, ensuring your water remains clean and fresh until you
+                return.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Testimonials Section -->
+<section class="py-5">
+  <div class="container">
+    <div class="row text-center mb-5">
+      <div class="col-12">
+        <h2 class="section-title" data-aos="fade-up">
+          What Our Subscribers Say
+        </h2>
+        <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">
+          Join thousands of satisfied customers
+        </p>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-4 mb-4" data-aos="fade-up">
+        <div class="testimonial-card p-4">
+          <div class="testimonial-content">
+            <div class="testimonial-rating mb-3">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+            </div>
+            <p class="mb-4">
+              "The Family plan is perfect for us. We never have to worry about
+              running out of water, and the bi-weekly delivery fits our
+              consumption perfectly. The dispenser is a great bonus!"
+            </p>
+            <div class="d-flex align-items-center">
+              <div class="testimonial-avatar me-3">
+                <img
+                  src="{{ url_for('static', filename='images/testimonial-4.jpg') }}"
+                  alt="Customer"
+                  class="rounded-circle"
+                  width="60"
+                />
+              </div>
+              <div>
+                <h5 class="mb-0">Robert Wilson</h5>
+                <small class="text-muted"
+                  >Family Plan Subscriber - 1 year</small
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="100">
+        <div class="testimonial-card p-4">
+          <div class="testimonial-content">
+            <div class="testimonial-rating mb-3">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+            </div>
+            <p class="mb-4">
+              "As a small business owner, the Premium plan has been a
+              game-changer for our office. Our team loves having different water
+              options, and the weekly delivery ensures we're always stocked."
+            </p>
+            <div class="d-flex align-items-center">
+              <div class="testimonial-avatar me-3">
+                <img
+                  src="{{ url_for('static', filename='images/testimonial-5.jpg') }}"
+                  alt="Customer"
+                  class="rounded-circle"
+                  width="60"
+                />
+              </div>
+              <div>
+                <h5 class="mb-0">Amanda Chen</h5>
+                <small class="text-muted"
+                  >Premium Plan Subscriber - 2 years</small
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="200">
+        <div class="testimonial-card p-4">
+          <div class="testimonial-content">
+            <div class="testimonial-rating mb-3">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star-half-alt"></i>
+            </div>
+            <p class="mb-4">
+              "The Basic plan is perfect for my apartment. I love the
+              convenience of monthly deliveries, and the water quality is
+              noticeably better than what comes from my tap. Great value!"
+            </p>
+            <div class="d-flex align-items-center">
+              <div class="testimonial-avatar me-3">
+                <img
+                  src="{{ url_for('static', filename='images/testimonial-6.jpg') }}"
+                  alt="Customer"
+                  class="rounded-circle"
+                  width="60"
+                />
+              </div>
+              <div>
+                <h5 class="mb-0">David Martinez</h5>
+                <small class="text-muted"
+                  >Basic Plan Subscriber - 6 months</small
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %} {% block styles %}
+<style>
+  /* Pricing Cards */
+  .pricing-card {
+    border: none;
+    border-radius: 15px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    position: relative;
+  }
+
+  .pricing-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+  }
+
+  .pricing-card.popular {
+    border: 2px solid var(--primary-color);
+    transform: scale(1.05);
+  }
+
+  .pricing-card.popular:hover {
+    transform: scale(1.05) translateY(-10px);
+  }
+
+  .popular-badge {
+    position: absolute;
+    top: 0;
+    right: 30px;
+    background-color: var(--primary-color);
+    color: white;
+    padding: 5px 15px;
+    border-radius: 0 0 10px 10px;
+    font-weight: 600;
+    font-size: 0.8rem;
+  }
+
+  .pricing-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 15px;
+    color: var(--primary-color);
+  }
+
+  .pricing-price {
+    margin-bottom: 20px;
+  }
+
+  .pricing-price .currency {
+    font-size: 1.5rem;
+    font-weight: 600;
+    vertical-align: top;
+    position: relative;
+    top: 10px;
+  }
+
+  .pricing-price .amount {
+    font-size: 3.5rem;
+    font-weight: 700;
+    line-height: 1;
+  }
+
+  .pricing-price .period {
+    font-size: 1rem;
+    color: #6c757d;
+  }
+
+  .pricing-description {
+    color: #6c757d;
+    margin-bottom: 20px;
+  }
+
+  .pricing-features li {
+    padding: 8px 0;
+    border-bottom: 1px solid #f8f9fa;
+  }
+
+  .pricing-features li:last-child {
+    border-bottom: none;
+  }
+
+  /* Feature Boxes */
+  .feature-box {
+    padding: 20px;
+    transition: all 0.3s ease;
+  }
+
+  .feature-box:hover .feature-icon {
+    transform: translateY(-10px);
+  }
+
+  .feature-icon {
+    transition: all 0.3s ease;
+  }
+
+  /* Custom Radio Buttons */
+  .custom-radio .form-check-label {
+    padding: 10px 15px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .custom-radio .form-check-input:checked + .form-check-label {
+    background-color: var(--light-color);
+    border-color: var(--primary-color);
+  }
+
+  /* Testimonial Cards */
+  .testimonial-card {
+    border-radius: 15px;
+    background-color: white;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+  }
+
+  .testimonial-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+  }
+
+  .testimonial-rating {
+    color: #ffc107;
+  }
+
+  .testimonial-avatar img {
+    border: 3px solid var(--light-color);
+  }
+
+  /* Accordion Styling */
+  .accordion-item {
+    border: none;
+    margin-bottom: 15px;
+    border-radius: 10px !important;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  }
+
+  .accordion-button {
+    font-weight: 600;
+    padding: 20px;
+    box-shadow: none !important;
+  }
+
+  .accordion-button:not(.collapsed) {
+    color: var(--primary-color);
+    background-color: var(--light-color);
+  }
+
+  .accordion-button:focus {
+    border-color: transparent;
+    box-shadow: none;
+  }
+
+  .accordion-button::after {
+    background-size: 1.2rem;
+    transition: all 0.2s ease;
+  }
+
+  .accordion-body {
+    padding: 20px;
+    line-height: 1.6;
+  }
+</style>
+{% endblock %} {% block scripts %}
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    // Plan selection
+    const planRadios = document.querySelectorAll('input[name="plan"]');
+    const waterTypeSelect = document.getElementById("waterType");
+    const deliveryFrequencySelect =
+      document.getElementById("deliveryFrequency");
+
+    planRadios.forEach((radio) => {
+      radio.addEventListener("change", function () {
+        // Update water type options based on plan
+        if (this.value === "premium") {
+          // Enable mix option for premium plan
+          const mixOption = waterTypeSelect.querySelector(
+            'option[value="Mix (Premium plan only)"]'
+          );
+          if (mixOption) {
+            mixOption.disabled = false;
+          }
+
+          // Set delivery frequency to weekly for premium
+          setSelectOption(deliveryFrequencySelect, "Weekly");
+        } else if (this.value === "family") {
+          // Disable mix option for non-premium plans
+          const mixOption = waterTypeSelect.querySelector(
+            'option:contains("Mix")'
+          );
+          if (mixOption) {
+            mixOption.disabled = true;
+          }
+
+          // Set delivery frequency to bi-weekly for family
+          setSelectOption(deliveryFrequencySelect, "Bi-weekly");
+        } else {
+          // Disable mix option for non-premium plans
+          const mixOption = waterTypeSelect.querySelector(
+            'option:contains("Mix")'
+          );
+          if (mixOption) {
+            mixOption.disabled = true;
+          }
+
+          // Set delivery frequency to monthly for basic
+          setSelectOption(deliveryFrequencySelect, "Monthly");
+        }
+      });
+    });
+
+    // Payment method toggle
+    const paymentMethods = document.querySelectorAll(
+      'input[name="paymentMethod"]'
+    );
+    const creditCardFields = document.getElementById("creditCardFields");
+
+    paymentMethods.forEach((method) => {
+      method.addEventListener("change", function () {
+        if (this.id === "creditCard") {
+          creditCardFields.style.display = "block";
+        } else {
+          creditCardFields.style.display = "none";
+        }
+      });
+    });
+
+    // Helper function to set select option
+    function setSelectOption(selectElement, optionText) {
+      for (let i = 0; i < selectElement.options.length; i++) {
+        if (selectElement.options[i].text === optionText) {
+          selectElement.selectedIndex = i;
+          break;
+        }
+      }
+    }
+
+    // Form validation
+    const form = document.querySelector(".needs-validation");
+    form.addEventListener(
+      "submit",
+      function (event) {
+        if (!form.checkValidity()) {
+          event.preventDefault();
+          event.stopPropagation();
+        }
+
+        form.classList.add("was-validated");
+      },
+      false
+    );
+
+    // Smooth scroll to form when clicking "Select Plan" buttons
+    const selectPlanButtons = document.querySelectorAll(".pricing-card a.btn");
+    selectPlanButtons.forEach((button) => {
+      button.addEventListener("click", function (e) {
+        e.preventDefault();
+
+        const targetId = this.getAttribute("href");
+        const targetElement = document.querySelector(targetId);
+
+        if (targetElement) {
+          // Get the plan type from the button's parent card
+          const planCard = this.closest(".pricing-card");
+          const planTitle = planCard
+            .querySelector(".pricing-title")
+            .textContent.toLowerCase();
+
+          // Select the corresponding radio button
+          const planRadio = document.querySelector(
+            `input[value="${planTitle}"]`
+          );
+          if (planRadio) {
+            planRadio.checked = true;
+
+            // Trigger the change event to update dependent fields
+            const event = new Event("change");
+            planRadio.dispatchEvent(event);
+          }
+
+          // Scroll to the form
+          window.scrollTo({
+            top: targetElement.offsetTop - 100,
+            behavior: "smooth",
+          });
+        }
+      });
+    });
+  });
+</script>
+{% endblock %}

@@ -1,0 +1,396 @@
+<!-- templates/contact.html -->
+{% extends "layout.html" %} {% block title %}Contact Us - PureFlow{% endblock %}
+{% block content %}
+<section class="hero-small" data-aos="fade-in">
+  <div class="hero-content">
+    <h1 class="hero-title">Get In Touch</h1>
+    <p class="hero-subtitle">We'd love to hear from you</p>
+  </div>
+</section>
+
+<section class="py-5">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-5 mb-4 mb-lg-0" data-aos="fade-right">
+        <h2 class="mb-4">Contact Information</h2>
+        <p class="lead mb-4">
+          Have questions about our products or services? Our team is here to
+          help!
+        </p>
+
+        <div class="contact-info">
+          <div class="d-flex mb-4">
+            <div class="icon-box me-3">
+              <i class="fas fa-map-marker-alt fa-2x text-primary"></i>
+            </div>
+            <div>
+              <h5>Our Location</h5>
+              <p class="mb-0">
+                123 Water Way, Crystal Springs<br />CA 94000, United States
+              </p>
+            </div>
+          </div>
+
+          <div class="d-flex mb-4">
+            <div class="icon-box me-3">
+              <i class="fas fa-phone-alt fa-2x text-primary"></i>
+            </div>
+            <div>
+              <h5>Call Us</h5>
+              <p class="mb-0">+1 (800) PURE-H2O<br />+1 (800) 787-3420</p>
+            </div>
+          </div>
+
+          <div class="d-flex mb-4">
+            <div class="icon-box me-3">
+              <i class="fas fa-envelope fa-2x text-primary"></i>
+            </div>
+            <div>
+              <h5>Email Us</h5>
+              <p class="mb-0">info@pureflow.com<br />support@pureflow.com</p>
+            </div>
+          </div>
+
+          <div class="d-flex mb-4">
+            <div class="icon-box me-3">
+              <i class="fas fa-clock fa-2x text-primary"></i>
+            </div>
+            <div>
+              <h5>Business Hours</h5>
+              <p class="mb-0">
+                Monday - Friday: 8:00 AM - 6:00 PM<br />Saturday: 9:00 AM - 4:00
+                PM
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="social-links mt-5">
+          <h5 class="mb-3">Connect With Us</h5>
+          <div class="d-flex gap-3">
+            <a href="#" class="social-link">
+              <i class="fab fa-facebook-f"></i>
+            </a>
+            <a href="#" class="social-link">
+              <i class="fab fa-twitter"></i>
+            </a>
+            <a href="#" class="social-link">
+              <i class="fab fa-instagram"></i>
+            </a>
+            <a href="#" class="social-link">
+              <i class="fab fa-linkedin-in"></i>
+            </a>
+            <a href="#" class="social-link">
+              <i class="fab fa-youtube"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-7" data-aos="fade-left">
+        <div class="card border-0 shadow-sm">
+          <div class="card-body p-5">
+            <h2 class="card-title mb-4">Send Us a Message</h2>
+
+            {% with messages = get_flashed_messages(with_categories=true) %} {%
+            if messages %} {% for category, message in messages %}
+            <div
+              class="alert alert-{{ category }} alert-dismissible fade show"
+              role="alert"
+            >
+              {{ message }}
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="alert"
+                aria-label="Close"
+              ></button>
+            </div>
+            {% endfor %} {% endif %} {% endwith %}
+
+            <form
+              method="POST"
+              action="{{ url_for('main.contact') }}"
+              class="needs-validation"
+              novalidate
+            >
+              {{ form.hidden_tag() }}
+
+              <div class="row">
+                <div class="col-md-6 mb-3">
+                  <label for="name" class="form-label">Your Name</label>
+                  <div class="input-group">
+                    <span class="input-group-text"
+                      ><i class="fas fa-user"></i
+                    ></span>
+                    {{ form.name(class="form-control", placeholder="Enter your
+                    name") }}
+                  </div>
+                  {% if form.name.errors %}
+                  <div class="invalid-feedback d-block">
+                    {% for error in form.name.errors %} {{ error }} {% endfor %}
+                  </div>
+                  {% endif %}
+                </div>
+
+                <div class="col-md-6 mb-3">
+                  <label for="email" class="form-label">Email Address</label>
+                  <div class="input-group">
+                    <span class="input-group-text"
+                      ><i class="fas fa-envelope"></i
+                    ></span>
+                    {{ form.email(class="form-control", placeholder="Enter your
+                    email") }}
+                  </div>
+                  {% if form.email.errors %}
+                  <div class="invalid-feedback d-block">
+                    {% for error in form.email.errors %} {{ error }} {% endfor
+                    %}
+                  </div>
+                  {% endif %}
+                </div>
+              </div>
+
+              <div class="mb-3">
+                <label for="phone" class="form-label"
+                  >Phone Number (Optional)</label
+                >
+                <div class="input-group">
+                  <span class="input-group-text"
+                    ><i class="fas fa-phone"></i
+                  ></span>
+                  {{ form.phone(class="form-control", placeholder="Enter your
+                  phone number") }}
+                </div>
+                {% if form.phone.errors %}
+                <div class="invalid-feedback d-block">
+                  {% for error in form.phone.errors %} {{ error }} {% endfor %}
+                </div>
+                {% endif %}
+              </div>
+
+              <div class="mb-3">
+                <label for="subject" class="form-label">Subject</label>
+                <div class="input-group">
+                  <span class="input-group-text"
+                    ><i class="fas fa-tag"></i
+                  ></span>
+                  {{ form.subject(class="form-control", placeholder="Enter
+                  message subject") }}
+                </div>
+                {% if form.subject.errors %}
+                <div class="invalid-feedback d-block">
+                  {% for error in form.subject.errors %} {{ error }} {% endfor
+                  %}
+                </div>
+                {% endif %}
+              </div>
+
+              <div class="mb-3">
+                <label for="message" class="form-label">Your Message</label>
+                <div class="input-group">
+                  <span class="input-group-text"
+                    ><i class="fas fa-comment"></i
+                  ></span>
+                  {{ form.message(class="form-control", rows="5",
+                  placeholder="Type your message here...") }}
+                </div>
+                {% if form.message.errors %}
+                <div class="invalid-feedback d-block">
+                  {% for error in form.message.errors %} {{ error }} {% endfor
+                  %}
+                </div>
+                {% endif %}
+              </div>
+
+              <div class="mb-3 form-check">
+                {{ form.subscribe(class="form-check-input") }}
+                <label class="form-check-label" for="subscribe">
+                  Subscribe to our newsletter for updates and special offers
+                </label>
+              </div>
+
+              <div class="d-grid">
+                <button type="submit" class="btn btn-custom btn-lg">
+                  Send Message
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Map Section -->
+<section class="py-5 bg-light">
+  <div class="container">
+    <div class="row text-center mb-5">
+      <div class="col-12">
+        <h2 class="section-title" data-aos="fade-up">Find Us</h2>
+        <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">
+          Visit our headquarters or distribution centers
+        </p>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-12" data-aos="fade-up">
+        <div class="map-container shadow-sm">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3153.7462082224106!2d-122.41941548468173!3d37.77492997975903!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80858093eaf3bebf%3A0x3d3f1a9f5e1d15e3!2sSan%20Francisco%2C%20CA%2094103!5e0!3m2!1sen!2sus!4v1635789966576!5m2!1sen!2sus"
+            width="100%"
+            height="450"
+            style="border: 0"
+            allowfullscreen=""
+            loading="lazy"
+          ></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Distribution Centers Section -->
+<section class="py-5">
+  <div class="container">
+    <div class="row text-center mb-5">
+      <div class="col-12">
+        <h2 class="section-title" data-aos="fade-up">
+          Our Distribution Centers
+        </h2>
+        <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">
+          Serving communities across the country
+        </p>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="100">
+        <div class="location-card p-4">
+          <h4 class="mb-3">West Coast</h4>
+          <p class="mb-2">
+            <i class="fas fa-map-marker-alt text-primary me-2"></i> 123 Water
+            Way, Crystal Springs, CA 94000
+          </p>
+          <p class="mb-2">
+            <i class="fas fa-phone text-primary me-2"></i> (800) 787-3420
+          </p>
+          <p class="mb-2">
+            <i class="fas fa-envelope text-primary me-2"></i>
+            westcoast@pureflow.com
+          </p>
+          <p class="mb-0">
+            <i class="fas fa-clock text-primary me-2"></i> Mon-Fri: 8AM-6PM,
+            Sat: 9AM-4PM
+          </p>
+        </div>
+      </div>
+
+      <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="200">
+        <div class="location-card p-4">
+          <h4 class="mb-3">Midwest</h4>
+          <p class="mb-2">
+            <i class="fas fa-map-marker-alt text-primary me-2"></i> 456 Spring
+            Avenue, Clear Lake, IL 60007
+          </p>
+          <p class="mb-2">
+            <i class="fas fa-phone text-primary me-2"></i> (800) 787-3421
+          </p>
+          <p class="mb-2">
+            <i class="fas fa-envelope text-primary me-2"></i>
+            midwest@pureflow.com
+          </p>
+          <p class="mb-0">
+            <i class="fas fa-clock text-primary me-2"></i> Mon-Fri: 8AM-6PM,
+            Sat: 9AM-4PM
+          </p>
+        </div>
+      </div>
+
+      <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="300">
+        <div class="location-card p-4">
+          <h4 class="mb-3">East Coast</h4>
+          <p class="mb-2">
+            <i class="fas fa-map-marker-alt text-primary me-2"></i> 789 Aqua
+            Boulevard, Blue Springs, NY 10001
+          </p>
+          <p class="mb-2">
+            <i class="fas fa-phone text-primary me-2"></i> (800) 787-3422
+          </p>
+          <p class="mb-2">
+            <i class="fas fa-envelope text-primary me-2"></i>
+            eastcoast@pureflow.com
+          </p>
+          <p class="mb-0">
+            <i class="fas fa-clock text-primary me-2"></i> Mon-Fri: 8AM-6PM,
+            Sat: 9AM-4PM
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %} {% block styles %}
+<style>
+  /* Contact Info Styling */
+  .contact-info .icon-box {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--light-color);
+    border-radius: 50%;
+    color: var(--primary-color);
+    transition: all 0.3s ease;
+  }
+
+  .contact-info .d-flex:hover .icon-box {
+    background-color: var(--primary-color);
+    color: white;
+    transform: translateY(-5px);
+  }
+
+  /* Social Links */
+  .social-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: var(--light-color);
+    color: var(--primary-color);
+    transition: all 0.3s ease;
+    text-decoration: none;
+  }
+
+  .social-link:hover {
+    background-color: var(--primary-color);
+    color: white;
+    transform: translateY(-5px);
+  }
+
+  /* Map Container */
+  .map-container {
+    border-radius: 15px;
+    overflow: hidden;
+  }
+
+  /* Location Cards */
+  .location-card {
+    background-color: white;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    height: 100%;
+    transition: all 0.3s ease;
+  }
+
+  .location-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+  }
+</style>
+{% endblock %}

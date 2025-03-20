@@ -1,0 +1,122 @@
+{% extends "layout.html" %}
+
+{% block extra_css %}
+<style>
+    .hero-small {
+        margin-top: 80px;
+        padding: 60px 0;
+    }
+    
+    .animated-bg {
+        margin-top: 80px;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+
+    <div class="animated-bg"></div>
+
+    <section class="hero-small" data-aos="fade-in">
+        <div class="container">
+            <h1 class="display-4">Our Story</h1>
+            <p class="lead">Delivering pure, refreshing water since 1995</p>
+        </div>
+    </section>
+
+    <section class="timeline-section py-5">
+        <div class="container">
+            <div class="timeline">
+                <div class="timeline-item" data-aos="fade-right">
+                    <div class="timeline-content">
+                        <h3>1995</h3>
+                        <p>Founded with a vision to provide pure, natural water to everyone.</p>
+                    </div>
+                </div>
+                <div class="timeline-item" data-aos="fade-left">
+                    <div class="timeline-content">
+                        <h3>2005</h3>
+                        <p>Expanded operations to include mineral-enhanced water products.</p>
+                    </div>
+                </div>
+                <div class="timeline-item" data-aos="fade-right">
+                    <div class="timeline-content">
+                        <h3>2015</h3>
+                        <p>Achieved carbon-neutral status in all our operations.</p>
+                    </div>
+                </div>
+                <div class="timeline-item" data-aos="fade-left">
+                    <div class="timeline-content">
+                        <h3>2023</h3>
+                        <p>Launched innovative sustainable packaging solutions.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="stats-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3" data-aos="fade-right" data-aos-delay="100">
+                    <div class="stat-box text-center">
+                        <div class="stat-number" data-count="1000000">0</div>
+                        <div class="stat-label">Bottles Produced Daily</div>
+                    </div>
+                </div>
+                <div class="col-md-3" data-aos="fade-right" data-aos-delay="200">
+                    <div class="stat-box text-center">
+                        <div class="stat-number" data-count="50000">0</div>
+                        <div class="stat-label">Happy Customers</div>
+                    </div>
+                </div>
+                <div class="col-md-3" data-aos="fade-right" data-aos-delay="300">
+                    <div class="stat-box text-center">
+                        <div class="stat-number" data-count="100">0</div>
+                        <div class="stat-label">Distribution Centers</div>
+                    </div>
+                </div>
+                <div class="col-md-3" data-aos="fade-right" data-aos-delay="400">
+                    <div class="stat-box text-center">
+                        <div class="stat-number" data-count="95">0</div>
+                        <div class="stat-label">Customer Satisfaction</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="values-section">
+        <div class="container">
+            <h2 class="text-center mb-5">Our Values</h2>
+            <div class="row">
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="value-card">
+                        <i class="fas fa-leaf value-icon"></i>
+                        <h3>Sustainability</h3>
+                        <p>Committed to environmental preservation and sustainable practices.</p>
+                    </div>
+                </div>
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="value-card">
+                        <i class="fas fa-hand-holding-water value-icon"></i>
+                        <h3>Quality Assurance</h3>
+                        <p>Rigorous testing and purification processes to ensure premium water quality.</p>
+                    </div>
+                </div>
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="300">
+                    <div class="value-card">
+                        <i class="fas fa-users value-icon"></i>
+                        <h3>Community Focus</h3>
+                        <p>Supporting local communities through responsible water management and social initiatives.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    {% block extra_js %}
+    <script src="{{ url_for('static', filename='js/about.js') }}"></script>
+    {% endblock %}
+
+    {% endblock content %}
