@@ -28,7 +28,6 @@ def create_app(config_class=Config):
 
 # Don't create app instance here, let create_app handle it
 # This allows for more flexibility in testing and deployment
-
+app = create_app()
 if __name__ == '__main__':
-    app = create_app()
     app.run(debug=True)
